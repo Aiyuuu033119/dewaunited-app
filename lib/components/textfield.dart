@@ -66,14 +66,22 @@ Widget textFieldInput(String label, TextEditingController result, bool error,
                         fit: BoxFit.contain,
                       ),
                     )
-                  : const Padding(
-                      padding: EdgeInsets.only(bottom: 16.0, top: 2.0),
-                      child: Image(
-                        image: AssetImage('assets/images/lock.png'),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-              suffixIcon: label == 'EMAIL'
+                  : label == 'CODE'
+                      ? const Padding(
+                          padding: EdgeInsets.only(bottom: 16.0, top: 2.0),
+                          child: Image(
+                            image: AssetImage('assets/images/qr-icon.png'),
+                            fit: BoxFit.contain,
+                          ),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.only(bottom: 16.0, top: 2.0),
+                          child: Image(
+                            image: AssetImage('assets/images/lock.png'),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+              suffixIcon: label == 'EMAIL' || label == 'CODE'
                   ? null
                   : GestureDetector(
                       onTap: () {

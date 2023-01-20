@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class Sidebar extends StatelessWidget {
   final Function onTap;
   final int active;
-  final String darkmode;
+  final bool darkmode;
 
   // ignore: prefer_const_constructors_in_immutables
   Sidebar(
@@ -20,7 +20,7 @@ class Sidebar extends StatelessWidget {
 
     return Drawer(
       child: Container(
-        color: Colors.white,
+        color: !darkmode ? Colors.white : Color(0xFF212529),
         child: Column(
           children: <Widget>[
             DrawerHeader(
@@ -31,10 +31,10 @@ class Sidebar extends StatelessWidget {
                   fit: BoxFit.cover,
                   alignment: Alignment.center,
                 ),
-                color: Colors.white,
+                color: !darkmode ? Colors.white : Color(0xFF212529),
                 border: Border.all(
                   width: 0.0,
-                  color: Colors.white,
+                  color: !darkmode ? Colors.white : Color(0xFF212529),
                   style: BorderStyle.solid,
                 ),
               ),
@@ -51,26 +51,129 @@ class Sidebar extends StatelessWidget {
               height: 40.0,
             ),
             Container(
-              color: active == 0 ? const Color(0xffF5C666) : Colors.transparent,
+              color: active == 0
+                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
+                  : Colors.transparent,
               child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-                title: Text('Home',
-                    style: TextStyle(
-                        color: active == 0 ? Colors.white : Colors.black,
-                        fontSize: 13.0,
-                        fontFamily: 'Spartan')),
-                onTap: () => onTap(context, 3),
-                // onTap: () => {Navigator.of(context).pop()},
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                title: Text(
+                  'Scan QR Code',
+                  style: TextStyle(
+                    color: active == 0
+                        ? Colors.white
+                        : !darkmode
+                            ? Colors.black
+                            : Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: active == 0 ? FontWeight.w600 : FontWeight.w100,
+                    fontFamily: 'Spartan',
+                  ),
+                ),
+                onTap: () => onTap(
+                  context,
+                  0,
+                ),
+              ),
+            ),
+            Container(
+              color: active == 1
+                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
+                  : Colors.transparent,
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                title: Text(
+                  'Fetch Event',
+                  style: TextStyle(
+                    color: active == 1
+                        ? Colors.white
+                        : !darkmode
+                            ? Colors.black
+                            : Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: active == 1 ? FontWeight.w600 : FontWeight.w100,
+                    fontFamily: 'Spartan',
+                  ),
+                ),
+                onTap: () => onTap(
+                  context,
+                  1,
+                ),
+              ),
+            ),
+            Container(
+              color: active == 2
+                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
+                  : Colors.transparent,
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                title: Text(
+                  'Sync Ticket',
+                  style: TextStyle(
+                    color: active == 2
+                        ? Colors.white
+                        : !darkmode
+                            ? Colors.black
+                            : Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: active == 2 ? FontWeight.w600 : FontWeight.w100,
+                    fontFamily: 'Spartan',
+                  ),
+                ),
+                onTap: () => onTap(
+                  context,
+                  2,
+                ),
+              ),
+            ),
+            Container(
+              color: active == 3
+                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
+                  : Colors.transparent,
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                title: Text(
+                  'Import & Export Event',
+                  style: TextStyle(
+                    color: active == 3
+                        ? Colors.white
+                        : !darkmode
+                            ? Colors.black
+                            : Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: active == 3 ? FontWeight.w600 : FontWeight.w100,
+                    fontFamily: 'Spartan',
+                  ),
+                ),
+                onTap: () => onTap(
+                  context,
+                  3,
+                ),
               ),
             ),
             ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-              title: Text('Logout',
-                  style: TextStyle(
-                      color: darkmode == "0" ? Colors.black : Colors.white,
-                      fontSize: 13.0,
-                      fontFamily: 'Spartan')),
-              onTap: () => onTap(context, 1),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+              ),
+              title: Text(
+                'Logout',
+                style: TextStyle(
+                  color: !darkmode ? Colors.black : Colors.white,
+                  fontSize: 15.0,
+                  fontFamily: 'Spartan',
+                ),
+              ),
+              onTap: () => onTap(
+                context,
+                4,
+              ),
               // onTap: () => {Navigator.of(context).pop()},
             ),
             Expanded(
@@ -86,8 +189,7 @@ class Sidebar extends StatelessWidget {
                           WidgetSpan(
                             child: Icon(
                               Icons.copyright,
-                              color:
-                                  darkmode == "1" ? Colors.white : Colors.black,
+                              color: darkmode ? Colors.white : Colors.black,
                               size: 15.0,
                             ),
                           ),
@@ -99,8 +201,7 @@ class Sidebar extends StatelessWidget {
                               letterSpacing: 1.0,
                               fontSize: 10.0,
                               fontFamily: 'Spartan',
-                              color:
-                                  darkmode == "1" ? Colors.white : Colors.black,
+                              color: darkmode ? Colors.white : Colors.black,
                             ),
                           ),
                           WidgetSpan(
@@ -110,14 +211,13 @@ class Sidebar extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: 'DEWA UNITED',
+                            text: 'DEWAUNITED',
                             style: TextStyle(
                               height: 1.4,
                               letterSpacing: 1.0,
                               fontSize: 10.0,
                               fontFamily: 'Spartan',
-                              color:
-                                  darkmode == "1" ? Colors.white : Colors.black,
+                              color: darkmode ? Colors.white : Colors.black,
                             ),
                           ),
                         ],

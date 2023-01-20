@@ -5,7 +5,6 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 Future<void> checkAuth(context, accessToken, tokenType) async {
   AuthModel instanceAuth = AuthModel();
   await instanceAuth.profile(accessToken, tokenType);
-  print(instanceAuth.data);
 
   if (instanceAuth.data.isNotEmpty) {
     if (instanceAuth.data['error'] == 'Unauthorized' ||

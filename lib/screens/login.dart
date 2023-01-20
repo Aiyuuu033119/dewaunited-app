@@ -1,9 +1,14 @@
 import 'package:dewaunited/components/textfield.dart';
 import 'package:dewaunited/compose/back.dart';
 import 'package:dewaunited/models/auth.dart';
+// import 'package:dewaunited/models/databaseHelper.dart';
+import 'package:dewaunited/screens/scanOffline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:string_validator/string_validator.dart';
 
 class Login extends StatefulWidget {
@@ -24,6 +29,16 @@ class _LoginState extends State<Login> {
   bool errorPass = false;
   String hintPass = 'Enter your password';
   bool viewPassword = true;
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.initState();
+    createDBTbl();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,16 +139,16 @@ class _LoginState extends State<Login> {
                               alignment: Alignment.bottomRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  loginValidator();
+                                  loginValidator(context);
                                 },
                                 child: Container(
                                   width: 130.0,
-                                  height: 55.0,
+                                  height: 60.0,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
                                         color: const Color(0xffE1B763)
-                                            .withOpacity(1.0),
+                                            .withOpacity(0.75),
                                         spreadRadius: 1,
                                         blurRadius: 12,
                                         offset: const Offset(0,
@@ -169,6 +184,32 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 30.0,
+                          ),
+                          SizedBox(
+                            width: width,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ScanOffline(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'No Internet? Use Offline Transaction',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontFamily: 'Spartan',
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFA2A4A3),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -191,7 +232,46 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void loginValidator() {
+  Future<void> createDBTbl() async {
+    var db = await openDatabase('dewaunited.db');
+
+    var tableNames = (await db
+            .query('sqlite_master', where: 'type = ?', whereArgs: ['table']))
+        .map((row) => row['name'] as String)
+        .toList(growable: false)
+      ..sort();
+
+    print(tableNames);
+
+    var event = tableNames.where(
+      (element) => element == 'event_tbl',
+    );
+
+    var ticket = tableNames.where(
+      (element) => element == 'ticket_tbl',
+    );
+
+    print(event.contains('event_tbl'));
+    print(ticket.contains('ticket_tbl'));
+
+    // ignore: unrelated_type_equality_checks
+    if (!event.contains('event_tbl')) {
+      await db.execute(
+          "CREATE TABLE event_tbl( id INTEGER PRIMARY KEY AUTOINCREMENT, ticketing_id TEXT, match_id TEXT, match_name TEXT, match_date TEXT, banner TEXT, banner_mobile TEXT, selling_start_date TEXT, selling_end_date TEXT, home_team TEXT, home_logo TEXT, away_team TEXT, away_logo TEXT, location_name TEXT, league_name TEXT, league_logo TEXT)");
+    } else {
+      print('existed');
+    }
+
+    // ignore: unrelated_type_equality_checks
+    if (!ticket.contains('ticket_tbl')) {
+      await db.execute(
+          "CREATE TABLE ticket_tbl( id INTEGER PRIMARY KEY AUTOINCREMENT, event_id TEXT, ticketing_id TEXT, code TEXT, name TEXT, category TEXT, seat_type TEXT, claimed_at TEXT, sync TEXT)");
+    } else {
+      print('existed');
+    }
+  }
+
+  void loginValidator(context) {
     email.text.isEmpty == true
         ? setState(() {
             errorEmail = true;
@@ -219,11 +299,11 @@ class _LoginState extends State<Login> {
           });
 
     if (!errorEmail && !errorPass) {
-      loginModel();
+      loginModel(context);
     }
   }
 
-  void loginModel() async {
+  void loginModel(context) async {
     AuthModel instance = AuthModel();
     await instance.login(email.text, password.text);
     if (instance.data.isNotEmpty) {
@@ -317,7 +397,6 @@ class _LoginState extends State<Login> {
         return;
       }
       final prefs = await SharedPreferences.getInstance();
-      print(instance.data);
       await prefs.setString('access_token', instance.data['access_token']);
       await prefs.setString('token_type', instance.data['token_type']);
       // ignore: use_build_context_synchronously
@@ -325,3 +404,40 @@ class _LoginState extends State<Login> {
     }
   }
 }
+
+// class DatabaseHelper {
+//   DatabaseHelper._privateConstructor();
+
+//   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+
+//   static Database? database;
+//   Future<Database> get getDatabase async => database = await initDatabase();
+
+//   Future<Database> initDatabase() async {
+//     Directory documentsDirectory = await getApplicationDocumentsDirectory();
+//     String path = join(documentsDirectory.path, 'dewaunited.db');
+//     print(path);
+//     return await openDatabase(path, version: 1, onCreate: onCreate);
+//   }
+
+//   Future onCreate(Database db, int version) async {
+//     await db.execute('''
+  // CREATE TABLE event_tbl(
+  //   id INTEGER PRIMARY KEY,
+  //   ticketing_id TEXT NOT NULL,
+  //   match_id TEXT NOT NULL,
+  //   match_name TEXT NOT NULL,
+  //   match_date TEXT NOT NULL,
+  //   banner TEXT NOT NULL,
+  //   banner_mobile TEXT NOT NULL,
+  //   selling_start_date TEXT NOT NULL,
+  //   selling_end_date TEXT NOT NULL,
+  //   home_team TEXT NOT NULL,
+  //   home_logo TEXT NOT NULL,
+  //   away_team TEXT NOT NULL,
+  //   away_logo TEXT NOT NULL,
+  //   location_name TEXT NOT NULL
+  // )
+//   ''');
+//   }
+// }

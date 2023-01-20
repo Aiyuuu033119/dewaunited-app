@@ -1,5 +1,6 @@
 import 'package:dewaunited/compose/back.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Redeem extends StatefulWidget {
   const Redeem({Key? key}) : super(key: key);
@@ -19,6 +20,15 @@ class _RedeemState extends State<Redeem> {
   bool errorPass = false;
   String hintPass = "";
   bool viewPassword = true;
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

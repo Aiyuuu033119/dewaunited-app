@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dewaunited/screens/login.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -25,6 +26,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.initState();
     check();
   }
@@ -85,7 +90,6 @@ class _SplashScreenState extends State<SplashScreen> {
             setState(
               () {
                 progressValue += 0.1;
-                print(progressValue);
                 // we "finish" downloading here
                 if (progressValue.toStringAsFixed(1) == '3.0') {
                   timer.cancel();
@@ -116,7 +120,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (page == 1) {
       return Login();
     } else {
-      return Home(isStillLogin: 1);
+      return Home(
+        isStillLogin: 1,
+        active: 0,
+      );
     }
   }
 }

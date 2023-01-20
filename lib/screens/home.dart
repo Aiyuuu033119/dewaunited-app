@@ -3,15 +3,21 @@ import 'package:dewaunited/components/sidebar.dart';
 import 'package:dewaunited/compose/back.dart';
 import 'package:dewaunited/compose/checkAuth.dart';
 import 'package:dewaunited/models/auth.dart';
+import 'package:dewaunited/screens/fetch.dart';
+import 'package:dewaunited/screens/import.dart';
 import 'package:dewaunited/screens/login.dart';
 import 'package:dewaunited/screens/scan.dart';
+import 'package:dewaunited/screens/sync.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
-  final int isStillLogin;
-  const Home({Key? key, required this.isStillLogin}) : super(key: key);
+  final int? isStillLogin;
+  final int active;
+  const Home({Key? key, this.isStillLogin, required this.active})
+      : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -23,20 +29,52 @@ class _HomeState extends State<Home> {
 
   String accessToken = "";
   String tokenType = "";
+  bool darkMode = false;
 
   Map data = {};
 
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.initState();
     initial();
+    index = widget.active;
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     List<Widget> pages = [
-      Scan(data: data, accessToken: accessToken, tokenType: tokenType),
+      Scan(
+        data: data,
+        accessToken: accessToken,
+        tokenType: tokenType,
+        darkMode: darkMode,
+      ),
+      FetchEvent(
+        data: data,
+        accessToken: accessToken,
+        tokenType: tokenType,
+        darkMode: darkMode,
+      ),
+      SyncTicket(
+        data: data,
+        accessToken: accessToken,
+        tokenType: tokenType,
+        darkMode: darkMode,
+      ),
+      ImportEvent(
+        data: data,
+        accessToken: accessToken,
+        tokenType: tokenType,
+        darkMode: darkMode,
+      ),
     ];
 
     return WillPopScope(
@@ -44,17 +82,24 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.white,
         drawer: Sidebar(
-          darkmode: "0",
+          darkmode: darkMode,
           active: index,
           onTap: (ctx, i) {
-            if (i == 1) {
+            if (i == 4) {
               logoutModel(context);
             } else {
-              print('new page');
+              setState(() {
+                index = i;
+                Navigator.pushReplacement(
+                  ctx,
+                  MaterialPageRoute(builder: (context) => Home(active: index)),
+                );
+              });
             }
           },
         ),
         appBar: AppBar(
+          toolbarHeight: 80.0,
           elevation: 0,
           leading: Builder(builder: (BuildContext context) {
             return IconButton(
@@ -72,14 +117,14 @@ class _HomeState extends State<Home> {
             );
           }),
           title: SizedBox(
-            width: width / 6,
+            width: isPortrait ? width / 6 : width / 14,
             child: const Image(
               image: AssetImage('assets/images/logo.png'),
               fit: BoxFit.contain,
             ),
           ),
           centerTitle: true,
-          backgroundColor: const Color(0xffF5C666),
+          backgroundColor: !darkMode ? Color(0xffF5C666) : Color(0xff343A40),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
@@ -87,21 +132,26 @@ class _HomeState extends State<Home> {
                 return IconButton(
                   padding: const EdgeInsets.only(right: 5.0),
                   iconSize: 30.0,
-                  icon: const SizedBox(
+                  icon: SizedBox(
                     child: Image(
-                      image: AssetImage('assets/images/moon.png'),
+                      image: !darkMode
+                          ? AssetImage('assets/images/moon.png')
+                          : AssetImage('assets/images/sun.png'),
                       fit: BoxFit.contain,
                     ),
                   ),
                   onPressed: () {
-                    Scaffold.of(context).openDrawer();
+                    setState(() {
+                      darkMode = !darkMode;
+                    });
                   },
                 );
               }),
             ),
           ],
         ),
-        body: pages[index],
+        body:
+            accessToken != "" && accessToken != "" ? pages[index] : SizedBox(),
       ),
     );
   }
@@ -390,6 +440,6 @@ class _HomeState extends State<Home> {
           ),
         );
       }
-    }, "0");
+    }, darkMode);
   }
 }

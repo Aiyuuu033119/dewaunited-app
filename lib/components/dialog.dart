@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 void dialogModal(BuildContext context, String contentMsg, String title,
-    Function open, String darkmode) {
+    Function open, bool darkmode) {
   showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: darkmode == "0" ? Colors.white : Color(0xff3C3C3C),
+          backgroundColor: !darkmode ? Colors.white : Color(0xFF212529),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           contentPadding: EdgeInsets.all(20.0),
@@ -18,29 +18,26 @@ void dialogModal(BuildContext context, String contentMsg, String title,
               child: Theme(
                 data: ThemeData(
                     unselectedWidgetColor:
-                        darkmode == "0" ? Colors.black26 : Colors.white),
+                        !darkmode ? Colors.black26 : Colors.white),
                 child: Column(
                   children: [
                     if (title == "Success")
                       Icon(
                         Icons.check_circle_outline,
                         size: 50.0,
-                        color:
-                            darkmode == "0" ? Color(0xFF8A7346) : Colors.white,
+                        color: !darkmode ? Color(0xFF8A7346) : Colors.white,
                       ),
                     if (title == "Reminder")
                       Icon(
                         Icons.error_outline,
                         size: 50.0,
-                        color:
-                            darkmode == "0" ? Color(0xFF8A7346) : Colors.white,
+                        color: !darkmode ? Color(0xFF8A7346) : Colors.white,
                       ),
                     if (title == "Error")
                       Icon(
                         Icons.cancel_outlined,
                         size: 50.0,
-                        color:
-                            darkmode == "0" ? Color(0xFF8A7346) : Colors.white,
+                        color: !darkmode ? Color(0xFF8A7346) : Colors.white,
                       ),
                     if (title == "Delete")
                       Icon(
@@ -57,7 +54,7 @@ void dialogModal(BuildContext context, String contentMsg, String title,
                       style: TextStyle(
                         fontSize: 13.0,
                         fontFamily: 'Spartan',
-                        color: darkmode == "0" ? Colors.black : Colors.white,
+                        color: !darkmode ? Colors.black : Colors.white,
                       ),
                     ),
                     SizedBox(

@@ -2,17 +2,16 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class AuthModel {
-  late String email;
-  late String password;
   late Map data;
   late String msg;
 
-  String baseUrl = 'https://backend.dewaunited.com/api';
+  String baseUrl = 'https://backend.dwunss.com/api';
 
   Future<void> login(email, password) async {
     try {
-      var url = Uri.parse('$baseUrl/login?email=$email&password=$password');
-      Response response = await post(url);
+      var url = Uri.parse('$baseUrl/login');
+      Map req = {'email': email, 'password': password};
+      Response response = await post(url, body: req);
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);
         data = json;
@@ -55,7 +54,6 @@ class AuthModel {
       });
       Map json = jsonDecode(response.body);
       data = json;
-      print(data);
     } catch (e) {
       msg = e.toString();
       // time = 'No Connection';

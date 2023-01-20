@@ -5,13 +5,17 @@ import 'package:dewaunited/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
       '/': (context) => const SplashScreen(),
       '/login': (context) => const Login(),
-      '/home': (context) => const Home(isStillLogin: 0),
+      '/home': (context) => const Home(
+            isStillLogin: 0,
+            active: 0,
+          ),
       '/redeem': (context) => const Redeem(),
     },
   ));
