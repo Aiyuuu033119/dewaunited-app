@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'package:dewaunited/screens/home.dart';
+import 'package:dewaunited/components/dialog.dart';
+import 'package:dewaunited/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dewaunited/screens/login.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -32,11 +33,91 @@ class _SplashScreenState extends State<SplashScreen> {
     ]);
     super.initState();
     check();
+    saveDatabase();
+  }
+
+  Future<bool> createFile() async {
+    Directory? directory;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      if (Platform.isAndroid) {
+        if (await _requestPermission(Permission.storage)) {
+          directory = await getExternalStorageDirectory();
+          String newPath = "";
+          print(directory.toString());
+          List paths = directory!.path.split("/");
+          for (int x = 1; x < paths.length; x++) {
+            String folder = paths[x];
+            if (folder != "data") {
+              newPath += "/" + folder;
+            } else {
+              break;
+            }
+          }
+          newPath = newPath + "/media/com.example.dewaunited/Database";
+          directory = Directory(newPath);
+          print(newPath);
+        } else {
+          dialogModal(
+              context,
+              "App will not work unless you accept the permission",
+              "Reminder", (ctx) async {
+            saveDatabase();
+            Navigator.pop(context);
+            return false;
+          }, false);
+          return false;
+        }
+      }
+
+      if (directory != null) {
+        File saveFile = File(directory!.path + "/dewaunited.db");
+        setState(() {
+          prefs.setString("dbPath", directory!.path + "/dewaunited.db");
+        });
+        print(saveFile);
+        if (!await directory.exists()) {
+          await directory.create(recursive: true);
+          saveFile.writeAsString("");
+          updateProgress();
+          return true;
+        }
+        if (await directory.exists()) {
+          updateProgress();
+        }
+      }
+
+      return false;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> _requestPermission(Permission permission) async {
+    if (await permission.isGranted) {
+      return true;
+    } else {
+      var result = await permission.request();
+      if (result == PermissionStatus.granted) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  saveDatabase() async {
+    bool create = await createFile();
+    if (create) {
+      print("File Created");
+    } else {
+      print("Problem Downloading File");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    updateProgress();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -49,15 +130,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: width / 4,
                   height: height - (height * 0.10),
-                  child: AnimatedSplashScreen(
-                    duration: 3000,
-                    splashIconSize: width / 4,
-                    splash: 'assets/images/logo.png',
-                    nextScreen: nextScreen(page),
-                    pageTransitionType: PageTransitionType.leftToRight,
-                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: height * 0.07),
@@ -91,8 +167,15 @@ class _SplashScreenState extends State<SplashScreen> {
               () {
                 progressValue += 0.1;
                 // we "finish" downloading here
-                if (progressValue.toStringAsFixed(1) == '3.0') {
+                print(progressValue);
+                if (progressValue.toStringAsFixed(1) == '1.0') {
                   timer.cancel();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Login(),
+                    ),
+                  );
                   return;
                 }
               },
@@ -116,14 +199,14 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  Widget nextScreen(page) {
-    if (page == 1) {
-      return Login();
-    } else {
-      return Home(
-        isStillLogin: 1,
-        active: 0,
-      );
-    }
-  }
+  // Widget nextScreen(page) {
+  //   if (page == 1) {
+  //     return Login();
+  //   } else {
+  //     return Home(
+  //       isStillLogin: 1,
+  //       active: 0,
+  //     );
+  //   }
+  // }
 }

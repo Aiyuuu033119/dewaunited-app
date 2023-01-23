@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:dewaunited/components/countAnimation.dart';
 import 'package:dewaunited/components/dialog.dart';
-import 'package:dewaunited/formatting/event.dart';
 import 'package:dewaunited/formatting/tickets.dart';
 import 'package:dewaunited/models/databaseHelper.dart';
 import 'package:dewaunited/models/fetch.dart';
@@ -33,7 +31,6 @@ class SyncTicket extends StatefulWidget {
 
 class _SyncTicketState extends State<SyncTicket> {
   Back back = Back();
-  int index = 0;
 
   bool canTouch = true;
   Duration duration = Duration(seconds: 0);

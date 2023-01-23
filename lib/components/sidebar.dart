@@ -140,7 +140,7 @@ class Sidebar extends StatelessWidget {
                   horizontal: 20.0,
                 ),
                 title: Text(
-                  'Import & Export Event',
+                  'Import',
                   style: TextStyle(
                     color: active == 3
                         ? Colors.white

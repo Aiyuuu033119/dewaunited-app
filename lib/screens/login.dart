@@ -233,7 +233,9 @@ class _LoginState extends State<Login> {
   }
 
   Future<void> createDBTbl() async {
-    var db = await openDatabase('dewaunited.db');
+    final prefs = await SharedPreferences.getInstance();
+    print('database path: ${prefs.getString("dbPath")}');
+    var db = await openDatabase(prefs.getString("dbPath").toString());
 
     var tableNames = (await db
             .query('sqlite_master', where: 'type = ?', whereArgs: ['table']))

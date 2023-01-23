@@ -239,7 +239,7 @@ class _FetchEventState extends State<FetchEvent> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Success',
                       style: TextStyle(
@@ -253,7 +253,7 @@ class _FetchEventState extends State<FetchEvent> {
                       height: 2.0,
                     ),
                     Text(
-                      'Successfully Fetch!',
+                      'Successfully Fetch! ${tickets.length} Ticket(s)',
                       style: TextStyle(
                         fontSize: 12.0,
                         fontFamily: 'Spartan',

@@ -1,9 +1,11 @@
 import 'package:dewaunited/formatting/event.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   Future<Database> getDB() async {
-    return await openDatabase('dewaunited.db');
+    final prefs = await SharedPreferences.getInstance();
+    return await openDatabase(prefs.getString("dbPath").toString());
   }
 
   Future<int> addEvent(Event event) async {
