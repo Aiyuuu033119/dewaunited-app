@@ -646,7 +646,9 @@ class _TicketState extends State<Ticket> {
         context, "Are you sure you want to redeem the ticket?", "Reminder",
         (ctx) async {
       TicketModel instanceTicket = TicketModel();
-      await instanceTicket.ticketUpdate(widget.accessToken, widget.qrString);
+      await instanceTicket.ticketUpdate(
+          widget.accessToken, widget.tokenType, widget.qrString);
+      print(instanceTicket.data);
       Navigator.pop(ctx);
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);

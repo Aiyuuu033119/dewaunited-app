@@ -7,12 +7,14 @@ class TicketModel {
 
   String ticketBaseUrl = 'https://dev.dwunss.com/api/ticket/v2';
 
-  Future<void> getSignature(accessToken, ticket) async {
+  Future<void> getSignature(accessToken, tokenType, ticket) async {
     try {
       var url = Uri.parse('$ticketBaseUrl/check-ticket');
       Response response = await post(url, body: {
-        'auth_key': '$accessToken',
         "code": ticket,
+      }, headers: {
+        'Authorization':
+            '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
       });
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);
@@ -27,12 +29,14 @@ class TicketModel {
     }
   }
 
-  Future<void> ticketUpdate(accessToken, ticket) async {
+  Future<void> ticketUpdate(accessToken, tokenType, ticket) async {
     try {
       var url = Uri.parse('$ticketBaseUrl/claim-ticket');
       Response response = await post(url, body: {
-        'auth_key': '$accessToken',
         "code": ticket,
+      }, headers: {
+        'Authorization':
+            '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
       });
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);

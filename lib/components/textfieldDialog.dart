@@ -50,7 +50,7 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: 14.0,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(10.0),
@@ -141,7 +141,8 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            backgroundColor: Colors.white,
+            backgroundColor:
+                widget.darkmode == true ? Color(0xff343A40) : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
             ),
@@ -149,60 +150,116 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
             insetPadding: EdgeInsets.symmetric(
               horizontal: 25.0,
             ),
-            content: SizedBox(
-              height: 68.0 * 4,
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Theme(
-                    data: ThemeData(
-                      unselectedWidgetColor: Colors.white,
-                    ),
-                    child: Builder(builder: (BuildContext context) {
-                      return Column(
-                        children: [
-                          for (var i = 0; i < widget.items.length; i++)
-                            ListTile(
-                              onTap: () {
-                                widget.result.text = widget.items[i]
-                                        [widget.itemLabel]
-                                    .toString();
-                                widget.model.text = widget.items[i]
-                                        [widget.itemValue]
-                                    .toString();
-                                Navigator.pop(context);
-                              },
-                              title: Container(
-                                height: 60.0,
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 5.0),
-                                      child: Text(
-                                        widget.items[i][widget.itemLabel],
-                                        style: TextStyle(
-                                          color: !widget.darkmode
-                                              ? Colors.black
-                                              : Colors.white,
-                                          fontSize: 15.0,
-                                          fontFamily: 'Spartan',
-                                        ),
+            content: widget.items.length >= 4
+                ? SizedBox(
+                    height: 68.0 * 4,
+                    child: SingleChildScrollView(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Theme(
+                          data: ThemeData(
+                            unselectedWidgetColor: Colors.white,
+                          ),
+                          child: Builder(builder: (BuildContext context) {
+                            return Column(
+                              children: [
+                                for (var i = 0; i < widget.items.length; i++)
+                                  ListTile(
+                                    onTap: () {
+                                      widget.result.text = widget.items[i]
+                                              [widget.itemLabel]
+                                          .toString();
+                                      widget.model.text = widget.items[i]
+                                              [widget.itemValue]
+                                          .toString();
+                                      Navigator.pop(context);
+                                    },
+                                    title: Container(
+                                      height: 60.0,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0),
+                                            child: Text(
+                                              widget.items[i][widget.itemLabel],
+                                              style: TextStyle(
+                                                color: !widget.darkmode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 15.0,
+                                                fontFamily: 'Spartan',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 20.0,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 20.0,
+                                  ),
+                              ],
+                            );
+                          }),
+                        ),
+                      ),
+                    ),
+                  )
+                : SizedBox(
+                    child: SingleChildScrollView(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Theme(
+                          data: ThemeData(
+                            unselectedWidgetColor: Colors.white,
+                          ),
+                          child: Builder(builder: (BuildContext context) {
+                            return Column(
+                              children: [
+                                for (var i = 0; i < widget.items.length; i++)
+                                  ListTile(
+                                    onTap: () {
+                                      widget.result.text = widget.items[i]
+                                              [widget.itemLabel]
+                                          .toString();
+                                      widget.model.text = widget.items[i]
+                                              [widget.itemValue]
+                                          .toString();
+                                      Navigator.pop(context);
+                                    },
+                                    title: Container(
+                                      height: 60.0,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0),
+                                            child: Text(
+                                              widget.items[i][widget.itemLabel],
+                                              style: TextStyle(
+                                                color: !widget.darkmode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 15.0,
+                                                fontFamily: 'Spartan',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 20.0,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                        ],
-                      );
-                    }),
+                                  ),
+                              ],
+                            );
+                          }),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
           );
         });
   }

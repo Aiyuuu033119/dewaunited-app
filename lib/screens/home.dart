@@ -4,7 +4,6 @@ import 'package:dewaunited/compose/back.dart';
 import 'package:dewaunited/compose/checkAuth.dart';
 import 'package:dewaunited/models/auth.dart';
 import 'package:dewaunited/screens/fetch.dart';
-import 'package:dewaunited/screens/import.dart';
 import 'package:dewaunited/screens/login.dart';
 import 'package:dewaunited/screens/scan.dart';
 import 'package:dewaunited/screens/sync.dart';
@@ -42,6 +41,14 @@ class _HomeState extends State<Home> {
     super.initState();
     initial();
     index = widget.active;
+    darmmodeFunc();
+  }
+
+  Future<void> darmmodeFunc() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      darkMode = prefs.getBool("darkmode")!;
+    });
   }
 
   @override
@@ -69,12 +76,6 @@ class _HomeState extends State<Home> {
         tokenType: tokenType,
         darkMode: darkMode,
       ),
-      ImportEvent(
-        data: data,
-        accessToken: accessToken,
-        tokenType: tokenType,
-        darkMode: darkMode,
-      ),
     ];
 
     return WillPopScope(
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
           darkmode: darkMode,
           active: index,
           onTap: (ctx, i) {
-            if (i == 4) {
+            if (i == 3) {
               logoutModel(context);
             } else {
               setState(() {
@@ -141,8 +142,12 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   onPressed: () {
-                    setState(() {
+                    setState(() async {
                       darkMode = !darkMode;
+                      final prefs = await SharedPreferences.getInstance();
+                      setState(() {
+                        prefs.setBool("darkmode", darkMode);
+                      });
                     });
                   },
                 );

@@ -2,6 +2,7 @@ import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:dewaunited/components/textfield.dart';
 import 'package:dewaunited/compose/back.dart';
 import 'package:dewaunited/models/databaseHelper.dart';
+import 'package:dewaunited/screens/importOffline.dart';
 import 'package:dewaunited/screens/ticketOffline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -94,6 +95,57 @@ class _ScanOfflineState extends State<ScanOffline> {
                         ],
                       ),
                     ),
+                    Positioned(
+                      width: width,
+                      top: 20.0,
+                      right: 20.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImportOffline(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10.0),
+                              width: 40.0,
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(35.0),
+                                ),
+                                color: Color(0xffE1B763),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                ),
+                              ),
+                              child: const Image(
+                                image: AssetImage(
+                                  'assets/images/import.png',
+                                ),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      width: width,
+                      bottom: 0,
+                      right: 0,
+                      child: const Image(
+                        image: AssetImage('assets/images/bg-bottom.png'),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 60.0),
@@ -129,7 +181,7 @@ class _ScanOfflineState extends State<ScanOffline> {
                             ),
                             margin:
                                 const EdgeInsets.symmetric(horizontal: 25.0),
-                            width: width,
+                            width: width / 1.5,
                             child: Image(
                               image: AssetImage('assets/images/qr.png'),
                               fit: BoxFit.fill,
@@ -259,16 +311,10 @@ class _ScanOfflineState extends State<ScanOffline> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 30.0,
+                          ),
                         ],
-                      ),
-                    ),
-                    Positioned(
-                      width: width,
-                      bottom: 0,
-                      right: 0,
-                      child: const Image(
-                        image: AssetImage('assets/images/bg-bottom.png'),
-                        fit: BoxFit.contain,
                       ),
                     ),
                   ],

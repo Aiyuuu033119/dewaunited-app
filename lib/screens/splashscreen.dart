@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
 
       if (directory != null) {
-        File saveFile = File(directory!.path + "/dewaunited.db");
+        File saveFile = File(directory.path + "/dewaunited.db");
         setState(() {
           prefs.setString("dbPath", directory!.path + "/dewaunited.db");
         });

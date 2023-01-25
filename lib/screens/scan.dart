@@ -250,7 +250,10 @@ class _ScanState extends State<Scan> {
         });
 
         TicketModel instanceTicket = TicketModel();
-        await instanceTicket.getSignature(widget.accessToken, scanResult);
+        await instanceTicket.getSignature(
+            widget.accessToken, widget.tokenType, scanResult);
+
+        print(instanceTicket.data);
 
         if (instanceTicket.data['error'] == true) {
           showToastWidget(
@@ -426,7 +429,8 @@ class _ScanState extends State<Scan> {
 
   Future<void> check() async {
     TicketModel instanceTicket = TicketModel();
-    await instanceTicket.getSignature(widget.accessToken, codeController.text);
+    await instanceTicket.getSignature(
+        widget.accessToken, widget.tokenType, codeController.text);
 
     if (instanceTicket.data['error'] == true) {
       setState(() {

@@ -131,33 +131,33 @@ class Sidebar extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              color: active == 3
-                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
-                  : Colors.transparent,
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                ),
-                title: Text(
-                  'Import',
-                  style: TextStyle(
-                    color: active == 3
-                        ? Colors.white
-                        : !darkmode
-                            ? Colors.black
-                            : Colors.white,
-                    fontSize: 15.0,
-                    fontWeight: active == 3 ? FontWeight.w600 : FontWeight.w100,
-                    fontFamily: 'Spartan',
-                  ),
-                ),
-                onTap: () => onTap(
-                  context,
-                  3,
-                ),
-              ),
-            ),
+            // Container(
+            //   color: active == 3
+            //       ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
+            //       : Colors.transparent,
+            //   child: ListTile(
+            //     contentPadding: const EdgeInsets.symmetric(
+            //       horizontal: 20.0,
+            //     ),
+            //     title: Text(
+            //       'Import',
+            //       style: TextStyle(
+            //         color: active == 3
+            //             ? Colors.white
+            //             : !darkmode
+            //                 ? Colors.black
+            //                 : Colors.white,
+            //         fontSize: 15.0,
+            //         fontWeight: active == 3 ? FontWeight.w600 : FontWeight.w100,
+            //         fontFamily: 'Spartan',
+            //       ),
+            //     ),
+            //     onTap: () => onTap(
+            //       context,
+            //       3,
+            //     ),
+            //   ),
+            // ),
             ListTile(
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
@@ -172,7 +172,7 @@ class Sidebar extends StatelessWidget {
               ),
               onTap: () => onTap(
                 context,
-                4,
+                3,
               ),
               // onTap: () => {Navigator.of(context).pop()},
             ),

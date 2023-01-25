@@ -304,7 +304,9 @@ class _FetchEventState extends State<FetchEvent> {
                       width: width / 1.2,
                       child: CircleProgressBar(
                         foregroundColor: const Color(0xffE1B763),
-                        backgroundColor: Colors.black12,
+                        backgroundColor: widget.darkMode == true
+                            ? Colors.white
+                            : Colors.black12,
                         value:
                             duration.toString() == '0:00:00.000000' ? 0.0 : 1.0,
                         animationDuration: duration,
@@ -329,7 +331,9 @@ class _FetchEventState extends State<FetchEvent> {
                                       fontSize: 30.0,
                                       fontFamily: 'Spartan',
                                       fontWeight: FontWeight.w900,
-                                      color: Colors.black,
+                                      color: widget.darkMode == true
+                                          ? Colors.white
+                                          : Colors.black,
                                     ),
                                   ),
                                 ],
@@ -342,7 +346,9 @@ class _FetchEventState extends State<FetchEvent> {
                                 style: TextStyle(
                                   fontSize: 15.0,
                                   fontFamily: 'Spartan',
-                                  color: Colors.black,
+                                  color: widget.darkMode == true
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ],
