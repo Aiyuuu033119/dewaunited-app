@@ -5,7 +5,7 @@ class AuthModel {
   late Map data;
   late String msg;
 
-  String baseUrl = 'https://backend.dwunss.com/api';
+  String baseUrl = 'https://backend.dewaunited.com/api';
 
   Future<void> login(email, password) async {
     try {

@@ -137,130 +137,182 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
 
   void dialog(BuildContext context) {
     showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor:
-                widget.darkmode == true ? Color(0xff343A40) : Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-            ),
-            contentPadding: const EdgeInsets.all(0.0),
-            insetPadding: EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            content: widget.items.length >= 4
-                ? SizedBox(
-                    height: 68.0 * 4,
-                    child: SingleChildScrollView(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Theme(
-                          data: ThemeData(
-                            unselectedWidgetColor: Colors.white,
-                          ),
-                          child: Builder(builder: (BuildContext context) {
-                            return Column(
-                              children: [
-                                for (var i = 0; i < widget.items.length; i++)
-                                  ListTile(
-                                    onTap: () {
-                                      widget.result.text = widget.items[i]
-                                              [widget.itemLabel]
-                                          .toString();
-                                      widget.model.text = widget.items[i]
-                                              [widget.itemValue]
-                                          .toString();
-                                      Navigator.pop(context);
-                                    },
-                                    title: Container(
-                                      height: 60.0,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Text(
-                                              widget.items[i][widget.itemLabel],
-                                              style: TextStyle(
-                                                color: !widget.darkmode
-                                                    ? Colors.black
-                                                    : Colors.white,
-                                                fontSize: 15.0,
-                                                fontFamily: 'Spartan',
-                                              ),
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor:
+              widget.darkmode == true ? Color(0xff343A40) : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+          ),
+          contentPadding: const EdgeInsets.all(0.0),
+          insetPadding: EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          content: Builder(
+            builder: (context) {
+              if (widget.items.length >= 4) {
+                return SizedBox(
+                  height: 68.0 * 4,
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Theme(
+                        data: ThemeData(
+                          unselectedWidgetColor: Colors.white,
+                        ),
+                        child: Builder(builder: (BuildContext context) {
+                          return Column(
+                            children: [
+                              for (var i = 0; i < widget.items.length; i++)
+                                ListTile(
+                                  onTap: () {
+                                    widget.result.text = widget.items[i]
+                                            [widget.itemLabel]
+                                        .toString();
+                                    widget.model.text = widget.items[i]
+                                            [widget.itemValue]
+                                        .toString();
+                                    Navigator.pop(context);
+                                  },
+                                  title: Container(
+                                    height: 60.0,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: Text(
+                                            widget.items[i][widget.itemLabel],
+                                            style: TextStyle(
+                                              color: !widget.darkmode
+                                                  ? Colors.black
+                                                  : Colors.white,
+                                              fontSize: 15.0,
+                                              fontFamily: 'Spartan',
                                             ),
                                           ),
-                                          const SizedBox(
-                                            width: 20.0,
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                        const SizedBox(
+                                          width: 20.0,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                              ],
-                            );
-                          }),
-                        ),
-                      ),
-                    ),
-                  )
-                : SizedBox(
-                    child: SingleChildScrollView(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Theme(
-                          data: ThemeData(
-                            unselectedWidgetColor: Colors.white,
-                          ),
-                          child: Builder(builder: (BuildContext context) {
-                            return Column(
-                              children: [
-                                for (var i = 0; i < widget.items.length; i++)
-                                  ListTile(
-                                    onTap: () {
-                                      widget.result.text = widget.items[i]
-                                              [widget.itemLabel]
-                                          .toString();
-                                      widget.model.text = widget.items[i]
-                                              [widget.itemValue]
-                                          .toString();
-                                      Navigator.pop(context);
-                                    },
-                                    title: Container(
-                                      height: 60.0,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Text(
-                                              widget.items[i][widget.itemLabel],
-                                              style: TextStyle(
-                                                color: !widget.darkmode
-                                                    ? Colors.black
-                                                    : Colors.white,
-                                                fontSize: 15.0,
-                                                fontFamily: 'Spartan',
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 20.0,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            );
-                          }),
-                        ),
+                                ),
+                            ],
+                          );
+                        }),
                       ),
                     ),
                   ),
-          );
-        });
+                );
+              } else if (widget.items.length >= 1 && widget.items.length < 4) {
+                return SizedBox(
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Theme(
+                        data: ThemeData(
+                          unselectedWidgetColor: Colors.white,
+                        ),
+                        child: Builder(builder: (BuildContext context) {
+                          return Column(
+                            children: [
+                              for (var i = 0; i < widget.items.length; i++)
+                                ListTile(
+                                  onTap: () {
+                                    widget.result.text = widget.items[i]
+                                            [widget.itemLabel]
+                                        .toString();
+                                    widget.model.text = widget.items[i]
+                                            [widget.itemValue]
+                                        .toString();
+                                    Navigator.pop(context);
+                                  },
+                                  title: Container(
+                                    height: 60.0,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: Text(
+                                            widget.items[i][widget.itemLabel],
+                                            style: TextStyle(
+                                              color: !widget.darkmode
+                                                  ? Colors.black
+                                                  : Colors.white,
+                                              fontSize: 15.0,
+                                              fontFamily: 'Spartan',
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 20.0,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          );
+                        }),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return SizedBox(
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Theme(
+                        data: ThemeData(
+                          unselectedWidgetColor: Colors.white,
+                        ),
+                        child: Builder(builder: (BuildContext context) {
+                          return Column(
+                            children: [
+                              ListTile(
+                                title: Container(
+                                  height: 60.0,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'No Data',
+                                          style: TextStyle(
+                                            color: !widget.darkmode
+                                                ? Colors.black
+                                                : Colors.white,
+                                            fontSize: 15.0,
+                                            fontFamily: 'Spartan',
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
+                      ),
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+        );
+      },
+    );
   }
 }
