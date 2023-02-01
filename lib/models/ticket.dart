@@ -5,11 +5,12 @@ class TicketModel {
   late Map data;
   late String msg;
 
-  String ticketBaseUrl = 'https://dev.dwunss.com/api/ticket/v2';
+  String ticketBaseUrl = 'https://dwunss.com/api/ticket/v2';
 
   Future<void> getSignature(accessToken, tokenType, ticket) async {
     try {
       var url = Uri.parse('$ticketBaseUrl/check-ticket');
+      print(ticket);
       Response response = await post(url, body: {
         "code": ticket,
       }, headers: {
