@@ -70,7 +70,6 @@ class _FetchEventState extends State<FetchEvent> {
     }
     setState(() {
       items = instance.items;
-      print(items);
     });
   }
 
@@ -127,7 +126,6 @@ class _FetchEventState extends State<FetchEvent> {
     if (eventQuery.length == 0) {
       saveFetchData(instance, '');
     } else {
-      print(eventQuery[0]['ticketing_id']);
       reminderModal(context, () {
         Navigator.pop(context);
         saveFetchData(instance, eventQuery[0]['ticketing_id']);
@@ -191,14 +189,10 @@ class _FetchEventState extends State<FetchEvent> {
 
     await instance.addEvent(event);
 
-    // print('tickets ${tickets.length}');
-
     var list = List.generate(
         tickets.length,
         (index) =>
             Ticket.toJson(tickets[index], int.parse(model.text)).toJson());
-
-    // print('time ${DateFormat('kk:mm:ss').format(now)}');
 
     await instance.addBulkTicket(list);
 

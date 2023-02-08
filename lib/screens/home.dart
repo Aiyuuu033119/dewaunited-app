@@ -268,8 +268,6 @@ class _HomeState extends State<Home> {
       }
       setState(() {
         data = instance.data;
-
-        print(data);
       });
 
       if (widget.isStillLogin == 0) {

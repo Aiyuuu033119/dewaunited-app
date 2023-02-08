@@ -234,7 +234,6 @@ class _LoginState extends State<Login> {
 
   Future<void> createDBTbl() async {
     final prefs = await SharedPreferences.getInstance();
-    print('database path: ${prefs.getString("dbPath")}');
     var db = await openDatabase(prefs.getString("dbPath").toString());
 
     var tableNames = (await db
@@ -242,8 +241,6 @@ class _LoginState extends State<Login> {
         .map((row) => row['name'] as String)
         .toList(growable: false)
       ..sort();
-
-    print(tableNames);
 
     var event = tableNames.where(
       (element) => element == 'event_tbl',
@@ -253,23 +250,16 @@ class _LoginState extends State<Login> {
       (element) => element == 'ticket_tbl',
     );
 
-    print(event.contains('event_tbl'));
-    print(ticket.contains('ticket_tbl'));
-
     // ignore: unrelated_type_equality_checks
     if (!event.contains('event_tbl')) {
       await db.execute(
           "CREATE TABLE event_tbl( id INTEGER PRIMARY KEY AUTOINCREMENT, ticketing_id TEXT, match_id TEXT, match_name TEXT, match_date TEXT, banner TEXT, banner_mobile TEXT, selling_start_date TEXT, selling_end_date TEXT, home_team TEXT, home_logo TEXT, away_team TEXT, away_logo TEXT, location_name TEXT, league_name TEXT, league_logo TEXT)");
-    } else {
-      print('existed');
     }
 
     // ignore: unrelated_type_equality_checks
     if (!ticket.contains('ticket_tbl')) {
       await db.execute(
           "CREATE TABLE ticket_tbl( id INTEGER PRIMARY KEY AUTOINCREMENT, event_id TEXT, ticketing_id TEXT, code TEXT, name TEXT, category TEXT, seat_type TEXT, claimed_at TEXT, sync TEXT)");
-    } else {
-      print('existed');
     }
   }
 
@@ -406,40 +396,3 @@ class _LoginState extends State<Login> {
     }
   }
 }
-
-// class DatabaseHelper {
-//   DatabaseHelper._privateConstructor();
-
-//   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
-
-//   static Database? database;
-//   Future<Database> get getDatabase async => database = await initDatabase();
-
-//   Future<Database> initDatabase() async {
-//     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-//     String path = join(documentsDirectory.path, 'dewaunited.db');
-//     print(path);
-//     return await openDatabase(path, version: 1, onCreate: onCreate);
-//   }
-
-//   Future onCreate(Database db, int version) async {
-//     await db.execute('''
-  // CREATE TABLE event_tbl(
-  //   id INTEGER PRIMARY KEY,
-  //   ticketing_id TEXT NOT NULL,
-  //   match_id TEXT NOT NULL,
-  //   match_name TEXT NOT NULL,
-  //   match_date TEXT NOT NULL,
-  //   banner TEXT NOT NULL,
-  //   banner_mobile TEXT NOT NULL,
-  //   selling_start_date TEXT NOT NULL,
-  //   selling_end_date TEXT NOT NULL,
-  //   home_team TEXT NOT NULL,
-  //   home_logo TEXT NOT NULL,
-  //   away_team TEXT NOT NULL,
-  //   away_logo TEXT NOT NULL,
-  //   location_name TEXT NOT NULL
-  // )
-//   ''');
-//   }
-// }

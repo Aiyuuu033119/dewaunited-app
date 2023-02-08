@@ -10,7 +10,6 @@ class TicketModel {
   Future<void> getSignature(accessToken, tokenType, ticket) async {
     try {
       var url = Uri.parse('$ticketBaseUrl/check-ticket');
-      print(ticket);
       Response response = await post(url, body: {
         "code": ticket,
       }, headers: {

@@ -239,21 +239,17 @@ class _ScanState extends State<Scan> {
     final permission = await requestPermission();
 
     if (permission == PermissionStatus.granted) {
-      print('granted');
       var codeSanner = await BarcodeScanner.scan(); //barcode scnner
 
       checkAuth(context, widget.accessToken, widget.tokenType);
       if (codeSanner.rawContent.isNotEmpty) {
         setState(() {
           scanResult = codeSanner.rawContent;
-          print('This is the QR CODE $scanResult');
         });
 
         TicketModel instanceTicket = TicketModel();
         await instanceTicket.getSignature(
             widget.accessToken, widget.tokenType, scanResult);
-
-        print(instanceTicket.data);
 
         if (instanceTicket.data['error'] == true) {
           showToastWidget(

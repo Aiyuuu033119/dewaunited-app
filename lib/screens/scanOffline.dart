@@ -338,13 +338,11 @@ class _ScanOfflineState extends State<ScanOffline> {
     final permission = await requestPermission();
 
     if (permission == PermissionStatus.granted) {
-      print('granted');
       var codeSanner = await BarcodeScanner.scan(); //barcode scnner
 
       if (codeSanner.rawContent.isNotEmpty) {
         setState(() {
           scanResult = codeSanner.rawContent;
-          print('This is the QR CODE $scanResult');
         });
 
         DatabaseHelper instance = DatabaseHelper();
@@ -434,9 +432,6 @@ class _ScanOfflineState extends State<ScanOffline> {
           var eventQuery = await db.query('event_tbl',
               where: 'ticketing_id = ?',
               whereArgs: [ticketQuery[0]['event_id']]);
-
-          // print(ticketQuery);
-          // print(eventQuery);
 
           Navigator.push(
             context,

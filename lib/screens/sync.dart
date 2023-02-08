@@ -113,14 +113,12 @@ class _SyncTicketState extends State<SyncTicket> {
 
     var ticketQuery = await db.query('ticket_tbl',
         where: 'event_id = ? AND sync = ?', whereArgs: [id, 1]);
-    print(ticketQuery);
 
     if (ticketQuery.length == 0) {
       warningToast();
     } else {
       var list = List.generate(ticketQuery.length,
           (index) => Ticket.toSync(ticketQuery[index], int.parse(id)).toSync());
-      print(list);
 
       setState(() {
         getDuration(list.length == 0 ? 5 : list.length);

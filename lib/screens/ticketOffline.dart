@@ -617,7 +617,6 @@ class _TicketOfflineState extends State<TicketOffline> {
           where: 'ticketing_id = ?',
           whereArgs: [widget.ticketData[0]['ticketing_id']],
           conflictAlgorithm: ConflictAlgorithm.replace);
-      print(ticketUpdate);
       Navigator.pop(ctx);
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);

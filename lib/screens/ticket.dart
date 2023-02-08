@@ -46,7 +46,6 @@ class _TicketState extends State<Ticket> {
     double width = MediaQuery.of(context).size.width;
     bool isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
-    print(width);
     return WillPopScope(
       onWillPop: () async => back.onWillPop(context),
       child: Scaffold(
@@ -648,7 +647,6 @@ class _TicketState extends State<Ticket> {
       TicketModel instanceTicket = TicketModel();
       await instanceTicket.ticketUpdate(
           widget.accessToken, widget.tokenType, widget.qrString);
-      print(instanceTicket.data);
       Navigator.pop(ctx);
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);

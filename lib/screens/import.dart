@@ -112,15 +112,11 @@ class _ImportEventState extends State<ImportEvent> {
 
   void openFile() async {
     final prefs = await SharedPreferences.getInstance();
-    print(prefs.getString("dbPath").toString());
     var result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
     );
 
     if (result == null) return;
-
-    print(result);
-    print(result.files[0].path);
 
     if (result.files[0].name.split(".").last == "db") {
       getFile(result.files[0].path, result.files[0].name);

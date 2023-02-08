@@ -45,7 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
         if (await _requestPermission(Permission.storage)) {
           directory = await getExternalStorageDirectory();
           String newPath = "";
-          print(directory.toString());
           List paths = directory!.path.split("/");
           for (int x = 1; x < paths.length; x++) {
             String folder = paths[x];
@@ -57,7 +56,6 @@ class _SplashScreenState extends State<SplashScreen> {
           }
           newPath = newPath + "/media/com.example.dewaunited/Database";
           directory = Directory(newPath);
-          print(newPath);
         } else {
           dialogModal(
               context,
@@ -76,7 +74,6 @@ class _SplashScreenState extends State<SplashScreen> {
         setState(() {
           prefs.setString("dbPath", directory!.path + "/dewaunited.db");
         });
-        print(saveFile);
         if (!await directory.exists()) {
           await directory.create(recursive: true);
           saveFile.writeAsString("");
@@ -108,12 +105,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   saveDatabase() async {
-    bool create = await createFile();
-    if (create) {
-      print("File Created");
-    } else {
-      print("Problem Downloading File");
-    }
+    await createFile();
   }
 
   @override
@@ -167,7 +159,6 @@ class _SplashScreenState extends State<SplashScreen> {
               () {
                 progressValue += 0.1;
                 // we "finish" downloading here
-                print(progressValue);
                 if (progressValue.toStringAsFixed(1) == '1.0') {
                   timer.cancel();
                   Navigator.pushReplacement(
