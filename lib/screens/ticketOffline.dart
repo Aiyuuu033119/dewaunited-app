@@ -42,8 +42,7 @@ class _TicketOfflineState extends State<TicketOffline> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    bool isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return WillPopScope(
       onWillPop: () async => back.onWillPop(context),
@@ -52,9 +51,7 @@ class _TicketOfflineState extends State<TicketOffline> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
-              height: isPortrait
-                  ? height + (width >= 375 ? height / 15 : height / 3)
-                  : width + (height >= 375 ? width / 4 : width / 2),
+              height: isPortrait ? height + (width >= 375 ? height / 15 : height / 3) : width + (height >= 375 ? width / 4 : width / 2),
               child: Stack(
                 children: [
                   SizedBox(
@@ -132,11 +129,10 @@ class _TicketOfflineState extends State<TicketOffline> {
                     top: 70.0,
                     right: 0,
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
+                      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
                       child: Container(
                         width: width,
-                        height: isPortrait ? height / 3.65 : width / 3.65,
+                        height: isPortrait ? height / 3.55 : width / 3.55,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
@@ -183,15 +179,10 @@ class _TicketOfflineState extends State<TicketOffline> {
                                   children: <Widget>[
                                     Text(widget.eventData[0]['league_logo']),
                                     Container(
-                                      width: isPortrait
-                                          ? height / 10.5
-                                          : width / 10.5,
-                                      child: widget.eventData[0]
-                                                  ['league_logo'] !=
-                                              null
+                                      width: isPortrait ? height / 10.5 : width / 10.5,
+                                      child: widget.eventData[0]['league_logo'] != null
                                           ? Image(
-                                              image: NetworkImage(widget
-                                                  .eventData[0]['league_logo']),
+                                              image: NetworkImage(widget.eventData[0]['league_logo']),
                                               fit: BoxFit.contain,
                                             )
                                           : SizedBox(),
@@ -204,23 +195,18 @@ class _TicketOfflineState extends State<TicketOffline> {
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(255, 255, 255, 255),
                                   image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/match.png'),
+                                    image: AssetImage('assets/images/match.png'),
                                     fit: BoxFit.cover,
                                   ),
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(25.0)),
+                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(25.0)),
                                 ),
                                 height: height / 5.5,
                               ),
                             SizedBox(
-                              height: isPortrait
-                                  ? (width >= 375 ? 15.0 : 10.0)
-                                  : (height >= 375 ? 15.0 : 10.0),
+                              height: isPortrait ? (width >= 375 ? 15.0 : 10.0) : (height >= 375 ? 15.0 : 10.0),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
                                 widget.ticketData.isNotEmpty
                                     ? '${widget.ticketData[0]['seat_type']} (${widget.ticketData[0]['category'][0].toUpperCase()}${widget.ticketData[0]['category'].substring(1).toLowerCase()})'
@@ -238,12 +224,9 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 2.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty
-                                    ? '${widget.eventData[0]['match_name']}'
-                                    : '---- ---',
+                                widget.ticketData.isNotEmpty ? '${widget.eventData[0]['match_name']}' : '---- ---',
                                 style: TextStyle(
                                   fontSize: 11.0,
                                   fontFamily: 'Spartan',
@@ -256,12 +239,9 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 8.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty
-                                    ? 'Spectator: ${widget.ticketData[0]['name']}'
-                                    : '---- ---',
+                                widget.ticketData.isNotEmpty ? 'Spectator: ${widget.ticketData[0]['name']}' : '---- ---',
                                 style: TextStyle(
                                   fontSize: 11.0,
                                   fontFamily: 'Spartan',
@@ -280,8 +260,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                     top: isPortrait ? height / 2.5 : width / 2.5,
                     right: 0,
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
+                      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
                       child: Container(
                         width: width,
                         child: Column(
@@ -303,8 +282,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                             SizedBox(
                               width: width,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
@@ -312,13 +290,10 @@ class _TicketOfflineState extends State<TicketOffline> {
                                     child: Column(
                                       children: [
                                         if (widget.eventData.isNotEmpty)
-                                          if (widget.eventData[0]
-                                                  ['home_logo'] !=
-                                              null)
+                                          if (widget.eventData[0]['home_logo'] != null)
                                             SizedBox(
                                               child: Image(
-                                                image: NetworkImage(widget
-                                                    .eventData[0]['home_logo']),
+                                                image: NetworkImage(widget.eventData[0]['home_logo']),
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
@@ -326,9 +301,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          widget.eventData.isNotEmpty
-                                              ? '${widget.eventData[0]['home_team']}'
-                                              : '---- ---',
+                                          widget.eventData.isNotEmpty ? '${widget.eventData[0]['home_team']}' : '---- ---',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 11.0,
@@ -355,13 +328,10 @@ class _TicketOfflineState extends State<TicketOffline> {
                                     child: Column(
                                       children: [
                                         if (widget.ticketData.isNotEmpty)
-                                          if (widget.eventData[0]
-                                                  ['away_logo'] !=
-                                              null)
+                                          if (widget.eventData[0]['away_logo'] != null)
                                             SizedBox(
                                               child: Image(
-                                                image: NetworkImage(widget
-                                                    .eventData[0]['away_logo']),
+                                                image: NetworkImage(widget.eventData[0]['away_logo']),
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
@@ -369,9 +339,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          widget.eventData.isNotEmpty
-                                              ? '${widget.eventData[0]['away_team']}'
-                                              : '---- ---',
+                                          widget.eventData.isNotEmpty ? '${widget.eventData[0]['away_team']}' : '---- ---',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 11.0,
@@ -390,8 +358,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 5.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Divider(
                                 thickness: 1,
                                 color: Color(0xFFE7E7E7),
@@ -414,9 +381,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 10.0,
                             ),
                             Text(
-                              widget.eventData.isNotEmpty
-                                  ? '${widget.eventData[0]['location_name']}'
-                                  : '---- ---',
+                              widget.eventData.isNotEmpty ? '${widget.eventData[0]['location_name']}' : '---- ---',
                               style: TextStyle(
                                 fontSize: 11.0,
                                 fontFamily: 'Spartan',
@@ -427,8 +392,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 5.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Divider(
                                 thickness: 1,
                                 color: Color(0xFFE7E7E7),
@@ -451,9 +415,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 10.0,
                             ),
                             Text(
-                              widget.eventData.isNotEmpty
-                                  ? '${widget.eventData[0]['match_date']}'
-                                  : '---- ---',
+                              widget.eventData.isNotEmpty ? '${widget.eventData[0]['match_date']}' : '---- ---',
                               style: TextStyle(
                                 fontSize: 11.0,
                                 fontFamily: 'Spartan',
@@ -464,8 +426,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 5.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Divider(
                                 thickness: 1,
                                 color: Color(0xFFE7E7E7),
@@ -488,9 +449,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 10.0,
                             ),
                             Text(
-                              widget.eventData.isNotEmpty
-                                  ? '${widget.eventData[0]['league_name']}'
-                                  : '---- ---',
+                              widget.eventData.isNotEmpty ? '${widget.eventData[0]['league_name']}' : '---- ---',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 11.0,
@@ -503,9 +462,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                               height: 7.0,
                             ),
                             Text(
-                              widget.ticketData.isNotEmpty
-                                  ? '(TICKET NO: ${widget.ticketData[0]['code']})'
-                                  : '---- ---',
+                              widget.ticketData.isNotEmpty ? '(TICKET NO: ${widget.ticketData[0]['code']})' : '---- ---',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 11.0,
@@ -518,24 +475,14 @@ class _TicketOfflineState extends State<TicketOffline> {
                             ),
                             Container(
                               color: widget.ticketData.isNotEmpty
-                                  ? (widget.ticketData[0]['claimed_at'] ==
-                                              null ||
-                                          widget.ticketData[0]['claimed_at'] ==
-                                              ""
+                                  ? (widget.ticketData[0]['claimed_at'] == null || widget.ticketData[0]['claimed_at'] == ""
                                       ? Colors.red
                                       : Color(0xFF8A7346))
                                   : Color(0xFF8A7346),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 3.0, horizontal: 5.0),
+                              padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                               child: Text(
                                 widget.ticketData.isNotEmpty
-                                    ? (widget.ticketData[0]['claimed_at'] ==
-                                                null ||
-                                            widget.ticketData[0]
-                                                    ['claimed_at'] ==
-                                                ""
-                                        ? 'Not Claim'
-                                        : 'Claim')
+                                    ? (widget.ticketData[0]['claimed_at'] == null || widget.ticketData[0]['claimed_at'] == "" ? 'Not Claim' : 'Claim')
                                     : '-----',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
@@ -550,8 +497,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                                 height: 40.0,
                               ),
                             if (widget.ticketData.isNotEmpty)
-                              if (widget.ticketData[0]['claimed_at'] == null ||
-                                  widget.ticketData[0]['claimed_at'] == "")
+                              if (widget.ticketData[0]['claimed_at'] == null || widget.ticketData[0]['claimed_at'] == "")
                                 GestureDetector(
                                   onTap: () async {
                                     claim();
@@ -562,12 +508,10 @@ class _TicketOfflineState extends State<TicketOffline> {
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                          color: const Color(0xffE1B763)
-                                              .withOpacity(1.0),
+                                          color: const Color(0xffE1B763).withOpacity(1.0),
                                           spreadRadius: 1,
                                           blurRadius: 12,
-                                          offset: const Offset(0,
-                                              4), // changes x,y position of shadow
+                                          offset: const Offset(0, 4), // changes x,y position of shadow
                                         ),
                                       ],
                                       color: const Color(0xffE1B763),
@@ -602,21 +546,12 @@ class _TicketOfflineState extends State<TicketOffline> {
   }
 
   void claim() async {
-    dialogModal(
-        context, "Are you sure you want to redeem the ticket?", "Reminder",
-        (ctx) async {
+    dialogModal(context, "Are you sure you want to redeem the ticket?", "Reminder", (ctx) async {
       DatabaseHelper instance = DatabaseHelper();
 
       var db = await instance.getDB();
-      var ticketUpdate = await db.update(
-          'ticket_tbl',
-          {
-            'claimed_at': DateFormat('yyyy-MM-dd hh:mm:ss').format(now),
-            'sync': 1
-          },
-          where: 'ticketing_id = ?',
-          whereArgs: [widget.ticketData[0]['ticketing_id']],
-          conflictAlgorithm: ConflictAlgorithm.replace);
+      var ticketUpdate = await db.update('ticket_tbl', {'claimed_at': DateFormat('yyyy-MM-dd hh:mm:ss').format(now), 'sync': 1},
+          where: 'ticketing_id = ?', whereArgs: [widget.ticketData[0]['ticketing_id']], conflictAlgorithm: ConflictAlgorithm.replace);
       Navigator.pop(ctx);
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);

@@ -6,6 +6,7 @@ class TicketModel {
   late String msg;
 
   String ticketBaseUrl = 'https://dwunss.com/api/ticket/v2';
+  // String ticketBaseUrl = 'https://du-front-api.woibayar.com/api/ticket/v2';
 
   Future<void> getSignature(accessToken, tokenType, ticket) async {
     try {
@@ -13,8 +14,7 @@ class TicketModel {
       Response response = await post(url, body: {
         "code": ticket,
       }, headers: {
-        'Authorization':
-            '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
+        'Authorization': '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
       });
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);
@@ -35,8 +35,7 @@ class TicketModel {
       Response response = await post(url, body: {
         "code": ticket,
       }, headers: {
-        'Authorization':
-            '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
+        'Authorization': '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
       });
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);

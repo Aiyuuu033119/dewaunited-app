@@ -44,8 +44,7 @@ class _TicketState extends State<Ticket> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    bool isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
       onWillPop: () async => back.onWillPop(context),
       child: Scaffold(
@@ -53,9 +52,7 @@ class _TicketState extends State<Ticket> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
-              height: isPortrait
-                  ? height + (width >= 375 ? height / 15 : height / 3)
-                  : width + (height >= 375 ? width / 4 : width / 2),
+              height: isPortrait ? height + (width >= 375 ? height / 15 : height / 3) : width + (height >= 375 ? width / 4 : width / 2),
               child: Stack(
                 children: [
                   SizedBox(
@@ -107,9 +104,7 @@ class _TicketState extends State<Ticket> {
                         ),
                       ),
                       centerTitle: true,
-                      backgroundColor: !widget.darkMode
-                          ? Color(0xffF5C666)
-                          : Color(0xff343A40),
+                      backgroundColor: !widget.darkMode ? Color(0xffF5C666) : Color(0xff343A40),
                     ),
                   ),
                   Positioned(
@@ -118,9 +113,7 @@ class _TicketState extends State<Ticket> {
                     right: 0,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: !widget.darkMode
-                            ? Color(0xffF5C666)
-                            : Color(0xff343A40),
+                        color: !widget.darkMode ? Color(0xffF5C666) : Color(0xff343A40),
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(25.0),
@@ -137,15 +130,12 @@ class _TicketState extends State<Ticket> {
                     top: 70.0,
                     right: 0,
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
+                      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
                       child: Container(
                         width: width,
-                        height: isPortrait ? height / 3.65 : width / 3.65,
+                        height: isPortrait ? height / 3.55 : width / 3.55,
                         decoration: BoxDecoration(
-                          color: !widget.darkMode
-                              ? Colors.white
-                              : Color(0xffE1B763),
+                          color: !widget.darkMode ? Colors.white : Color(0xffE1B763),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.12),
@@ -162,25 +152,21 @@ class _TicketState extends State<Ticket> {
                           ),
                           border: Border.all(
                             width: !widget.darkMode ? 3.0 : 1.0,
-                            color: !widget.darkMode
-                                ? Color.fromARGB(255, 255, 255, 255)
-                                : Color(0xffE1B763),
+                            color: !widget.darkMode ? Color.fromARGB(255, 255, 255, 255) : Color(0xffE1B763),
                             style: BorderStyle.solid,
                           ),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (widget.ticketData['matches']['banner_mobile'] !=
-                                null)
+                            if (widget.ticketData['matches']['banner_mobile'] != null)
                               Container(
                                 width: width,
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(255, 255, 255, 255),
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                      widget.ticketData['matches']
-                                          ['banner_mobile'],
+                                      widget.ticketData['matches']['banner_mobile'],
                                     ),
                                     fit: BoxFit.cover,
                                   ),
@@ -193,16 +179,10 @@ class _TicketState extends State<Ticket> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     Container(
-                                      width: isPortrait
-                                          ? height / 10.5
-                                          : width / 10.5,
-                                      child: widget.ticketData['matches']
-                                                  ['banner_mobile'] !=
-                                              null
+                                      width: isPortrait ? height / 10.5 : width / 10.5,
+                                      child: widget.ticketData['matches']['banner_mobile'] != null
                                           ? Image(
-                                              image: NetworkImage(
-                                                  widget.ticketData['matches']
-                                                      ['league']['logo']),
+                                              image: NetworkImage(widget.ticketData['matches']['league']['logo']),
                                               fit: BoxFit.contain,
                                             )
                                           : SizedBox(),
@@ -215,23 +195,18 @@ class _TicketState extends State<Ticket> {
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(255, 255, 255, 255),
                                   image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/match.png'),
+                                    image: AssetImage('assets/images/match.png'),
                                     fit: BoxFit.cover,
                                   ),
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(25.0)),
+                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(25.0)),
                                 ),
                                 height: height / 5.5,
                               ),
                             SizedBox(
-                              height: isPortrait
-                                  ? (width >= 375 ? 15.0 : 10.0)
-                                  : (height >= 375 ? 15.0 : 10.0),
+                              height: isPortrait ? (width >= 375 ? 15.0 : 10.0) : (height >= 375 ? 15.0 : 10.0),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
                                 widget.ticketData.isNotEmpty
                                     ? '${widget.ticketData['seat_type']} (${widget.ticketData['seat_category'][0].toUpperCase()}${widget.ticketData['seat_category'].substring(1).toLowerCase()})'
@@ -240,9 +215,7 @@ class _TicketState extends State<Ticket> {
                                   fontSize: 14.0,
                                   fontFamily: 'Spartan',
                                   fontWeight: FontWeight.w600,
-                                  color: !widget.darkMode
-                                      ? Colors.black
-                                      : Colors.white,
+                                  color: !widget.darkMode ? Colors.black : Colors.white,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -251,19 +224,14 @@ class _TicketState extends State<Ticket> {
                               height: 2.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty
-                                    ? '${widget.ticketData['matches']['league']['name']}'
-                                    : '---- ---',
+                                widget.ticketData.isNotEmpty ? '${widget.ticketData['matches']['league']['name']}' : '---- ---',
                                 style: TextStyle(
                                   fontSize: 11.0,
                                   fontFamily: 'Spartan',
                                   fontWeight: FontWeight.w600,
-                                  color: !widget.darkMode
-                                      ? Color(0xFF634D23)
-                                      : Colors.white,
+                                  color: !widget.darkMode ? Color(0xFF634D23) : Colors.white,
                                 ),
                               ),
                             ),
@@ -271,19 +239,14 @@ class _TicketState extends State<Ticket> {
                               height: 8.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty
-                                    ? 'Spectator: ${widget.ticketData['name']}'
-                                    : '---- ---',
+                                widget.ticketData.isNotEmpty ? 'Spectator: ${widget.ticketData['name']}' : '---- ---',
                                 style: TextStyle(
                                     fontSize: 11.0,
                                     fontFamily: 'Spartan',
                                     fontWeight: FontWeight.w600,
-                                    color: !widget.darkMode
-                                        ? Colors.black
-                                        : Colors.white),
+                                    color: !widget.darkMode ? Colors.black : Colors.white),
                               ),
                             ),
                           ],
@@ -296,8 +259,7 @@ class _TicketState extends State<Ticket> {
                     top: isPortrait ? height / 2.5 : width / 2.5,
                     right: 0,
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
+                      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
                       child: Container(
                         width: width,
                         child: Column(
@@ -309,9 +271,7 @@ class _TicketState extends State<Ticket> {
                                 fontSize: 14.0,
                                 fontFamily: 'Spartan',
                                 fontWeight: FontWeight.w600,
-                                color: !widget.darkMode
-                                    ? Colors.black
-                                    : Colors.white,
+                                color: !widget.darkMode ? Colors.black : Colors.white,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -321,8 +281,7 @@ class _TicketState extends State<Ticket> {
                             SizedBox(
                               width: width,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
@@ -330,14 +289,10 @@ class _TicketState extends State<Ticket> {
                                     child: Column(
                                       children: [
                                         if (widget.ticketData.isNotEmpty)
-                                          if (widget.ticketData['matches']
-                                                  ['team_a']['logo'] !=
-                                              null)
+                                          if (widget.ticketData['matches']['team_a']['logo'] != null)
                                             SizedBox(
                                               child: Image(
-                                                image: NetworkImage(
-                                                    widget.ticketData['matches']
-                                                        ['team_a']['logo']),
+                                                image: NetworkImage(widget.ticketData['matches']['team_a']['logo']),
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
@@ -345,17 +300,13 @@ class _TicketState extends State<Ticket> {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          widget.ticketData.isNotEmpty
-                                              ? '${widget.ticketData['matches']['team_a']['name']}'
-                                              : '---- ---',
+                                          widget.ticketData.isNotEmpty ? '${widget.ticketData['matches']['team_a']['name']}' : '---- ---',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 11.0,
                                             fontFamily: 'Spartan',
                                             fontWeight: FontWeight.w600,
-                                            color: !widget.darkMode
-                                                ? Color(0xFF634D23)
-                                                : Colors.white,
+                                            color: !widget.darkMode ? Color(0xFF634D23) : Colors.white,
                                           ),
                                         ),
                                       ],
@@ -367,9 +318,7 @@ class _TicketState extends State<Ticket> {
                                       fontSize: 14.0,
                                       fontFamily: 'Spartan',
                                       fontWeight: FontWeight.w600,
-                                      color: !widget.darkMode
-                                          ? Color(0xFF4E4E4E)
-                                          : Colors.white,
+                                      color: !widget.darkMode ? Color(0xFF4E4E4E) : Colors.white,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -378,14 +327,10 @@ class _TicketState extends State<Ticket> {
                                     child: Column(
                                       children: [
                                         if (widget.ticketData.isNotEmpty)
-                                          if (widget.ticketData['matches']
-                                                  ['team_b']['logo'] !=
-                                              null)
+                                          if (widget.ticketData['matches']['team_b']['logo'] != null)
                                             SizedBox(
                                               child: Image(
-                                                image: NetworkImage(
-                                                    widget.ticketData['matches']
-                                                        ['team_b']['logo']),
+                                                image: NetworkImage(widget.ticketData['matches']['team_b']['logo']),
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
@@ -393,17 +338,13 @@ class _TicketState extends State<Ticket> {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          widget.ticketData.isNotEmpty
-                                              ? '${widget.ticketData['matches']['team_b']['name']}'
-                                              : '---- ---',
+                                          widget.ticketData.isNotEmpty ? '${widget.ticketData['matches']['team_b']['name']}' : '---- ---',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 11.0,
                                             fontFamily: 'Spartan',
                                             fontWeight: FontWeight.w600,
-                                            color: !widget.darkMode
-                                                ? Color(0xFF634D23)
-                                                : Colors.white,
+                                            color: !widget.darkMode ? Color(0xFF634D23) : Colors.white,
                                           ),
                                         ),
                                       ],
@@ -416,13 +357,10 @@ class _TicketState extends State<Ticket> {
                               height: 5.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Divider(
                                 thickness: 1,
-                                color: !widget.darkMode
-                                    ? Color(0xFFE7E7E7)
-                                    : Color(0xffF5C666),
+                                color: !widget.darkMode ? Color(0xFFE7E7E7) : Color(0xffF5C666),
                               ),
                             ),
                             SizedBox(
@@ -434,9 +372,7 @@ class _TicketState extends State<Ticket> {
                                 fontSize: 14.0,
                                 fontFamily: 'Spartan',
                                 fontWeight: FontWeight.w600,
-                                color: !widget.darkMode
-                                    ? Colors.black
-                                    : Colors.white,
+                                color: !widget.darkMode ? Colors.black : Colors.white,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -444,28 +380,21 @@ class _TicketState extends State<Ticket> {
                               height: 10.0,
                             ),
                             Text(
-                              widget.ticketData.isNotEmpty
-                                  ? '${widget.ticketData['matches']['location']['name']}'
-                                  : '---- ---',
+                              widget.ticketData.isNotEmpty ? '${widget.ticketData['matches']['location']['name']}' : '---- ---',
                               style: TextStyle(
                                 fontSize: 11.0,
                                 fontFamily: 'Spartan',
-                                color: !widget.darkMode
-                                    ? Color(0xFF787878)
-                                    : Colors.white,
+                                color: !widget.darkMode ? Color(0xFF787878) : Colors.white,
                               ),
                             ),
                             SizedBox(
                               height: 5.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Divider(
                                 thickness: 1,
-                                color: !widget.darkMode
-                                    ? Color(0xFFE7E7E7)
-                                    : Color(0xffF5C666),
+                                color: !widget.darkMode ? Color(0xFFE7E7E7) : Color(0xffF5C666),
                               ),
                             ),
                             SizedBox(
@@ -477,9 +406,7 @@ class _TicketState extends State<Ticket> {
                                 fontSize: 14.0,
                                 fontFamily: 'Spartan',
                                 fontWeight: FontWeight.w600,
-                                color: !widget.darkMode
-                                    ? Colors.black
-                                    : Colors.white,
+                                color: !widget.darkMode ? Colors.black : Colors.white,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -487,28 +414,21 @@ class _TicketState extends State<Ticket> {
                               height: 10.0,
                             ),
                             Text(
-                              widget.ticketData.isNotEmpty
-                                  ? '${widget.ticketData['matches']['match_date']}'
-                                  : '---- ---',
+                              widget.ticketData.isNotEmpty ? '${widget.ticketData['matches']['match_date']}' : '---- ---',
                               style: TextStyle(
                                 fontSize: 11.0,
                                 fontFamily: 'Spartan',
-                                color: !widget.darkMode
-                                    ? Color(0xFF787878)
-                                    : Colors.white,
+                                color: !widget.darkMode ? Color(0xFF787878) : Colors.white,
                               ),
                             ),
                             SizedBox(
                               height: 5.0,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Divider(
                                 thickness: 1,
-                                color: !widget.darkMode
-                                    ? Color(0xFFE7E7E7)
-                                    : Color(0xffF5C666),
+                                color: !widget.darkMode ? Color(0xFFE7E7E7) : Color(0xffF5C666),
                               ),
                             ),
                             SizedBox(
@@ -520,9 +440,7 @@ class _TicketState extends State<Ticket> {
                                 fontSize: 14.0,
                                 fontFamily: 'Spartan',
                                 fontWeight: FontWeight.w600,
-                                color: !widget.darkMode
-                                    ? Colors.black
-                                    : Colors.white,
+                                color: !widget.darkMode ? Colors.black : Colors.white,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -530,33 +448,25 @@ class _TicketState extends State<Ticket> {
                               height: 10.0,
                             ),
                             Text(
-                              widget.ticketData.isNotEmpty
-                                  ? '${widget.ticketData['matches']['league']['name']}'
-                                  : '---- ---',
+                              widget.ticketData.isNotEmpty ? '${widget.ticketData['matches']['league']['name']}' : '---- ---',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 11.0,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Spartan',
-                                color: !widget.darkMode
-                                    ? Color(0xFF8A7346)
-                                    : Colors.white,
+                                color: !widget.darkMode ? Color(0xFF8A7346) : Colors.white,
                               ),
                             ),
                             SizedBox(
                               height: 7.0,
                             ),
                             Text(
-                              widget.ticketData.isNotEmpty
-                                  ? '(TICKET NO: ${widget.ticketData['ticket']})'
-                                  : '---- ---',
+                              widget.ticketData.isNotEmpty ? '(TICKET NO: ${widget.ticketData['ticket']})' : '---- ---',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 11.0,
                                 fontFamily: 'Spartan',
-                                color: !widget.darkMode
-                                    ? Color(0xFF787878)
-                                    : Colors.white,
+                                color: !widget.darkMode ? Color(0xFF787878) : Colors.white,
                               ),
                             ),
                             SizedBox(
@@ -564,18 +474,11 @@ class _TicketState extends State<Ticket> {
                             ),
                             Container(
                               color: widget.ticketData.isNotEmpty
-                                  ? (widget.ticketData['claimed_at'] == null
-                                      ? Colors.red
-                                      : Color(0xFF8A7346))
+                                  ? (widget.ticketData['claimed_at'] == null ? Colors.red : Color(0xFF8A7346))
                                   : Color(0xFF8A7346),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 3.0, horizontal: 5.0),
+                              padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty
-                                    ? (widget.ticketData['claimed_at'] == null
-                                        ? 'Not Claim'
-                                        : 'Claim')
-                                    : '-----',
+                                widget.ticketData.isNotEmpty ? (widget.ticketData['claimed_at'] == null ? 'Not Claim' : 'Claim') : '-----',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 8.0,
@@ -600,12 +503,10 @@ class _TicketState extends State<Ticket> {
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                          color: const Color(0xffE1B763)
-                                              .withOpacity(1.0),
+                                          color: const Color(0xffE1B763).withOpacity(1.0),
                                           spreadRadius: 1,
                                           blurRadius: !widget.darkMode ? 12 : 0,
-                                          offset: const Offset(0,
-                                              4), // changes x,y position of shadow
+                                          offset: const Offset(0, 4), // changes x,y position of shadow
                                         ),
                                       ],
                                       color: const Color(0xffE1B763),
@@ -641,12 +542,9 @@ class _TicketState extends State<Ticket> {
 
   void claim(darkMode) async {
     checkAuth(context, widget.accessToken, widget.tokenType);
-    dialogModal(
-        context, "Are you sure you want to redeem the ticket?", "Reminder",
-        (ctx) async {
+    dialogModal(context, "Are you sure you want to redeem the ticket?", "Reminder", (ctx) async {
       TicketModel instanceTicket = TicketModel();
-      await instanceTicket.ticketUpdate(
-          widget.accessToken, widget.tokenType, widget.qrString);
+      await instanceTicket.ticketUpdate(widget.accessToken, widget.tokenType, widget.qrString);
       Navigator.pop(ctx);
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);

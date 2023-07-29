@@ -57,10 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
           newPath = newPath + "/media/com.example.dewaunited/Database";
           directory = Directory(newPath);
         } else {
-          dialogModal(
-              context,
-              "App will not work unless you accept the permission",
-              "Reminder", (ctx) async {
+          dialogModal(context, "App will not work unless you accept the permission", "Reminder", (ctx) async {
             saveDatabase();
             Navigator.pop(context);
             return false;
@@ -134,8 +131,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: LinearProgressIndicator(
                       minHeight: 6.0,
                       backgroundColor: const Color(0xFF8A7346),
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color(0xFFF5C666)),
+                      valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFF5C666)),
                       value: progressValue,
                     ),
                   ),

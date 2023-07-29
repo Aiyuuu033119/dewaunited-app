@@ -6,6 +6,7 @@ class AuthModel {
   late String msg;
 
   String baseUrl = 'https://backend.dewaunited.com/api';
+  // String baseUrl = 'https://du-front-admin.woibayar.com/api';
 
   Future<void> login(email, password) async {
     try {
@@ -28,10 +29,8 @@ class AuthModel {
   Future<void> profile(accessToken, tokenType) async {
     try {
       var url = Uri.parse('$baseUrl/profile');
-      Response response = await post(url, headers: {
-        'Authorization':
-            '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
-      });
+      Response response = await post(url,
+          headers: {'Authorization': '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'});
       if (response.statusCode == 200) {
         Map json = jsonDecode(response.body);
         data = json;
@@ -48,10 +47,8 @@ class AuthModel {
   Future<void> logout(accessToken, tokenType) async {
     try {
       var url = Uri.parse('$baseUrl/logout');
-      Response response = await post(url, headers: {
-        'Authorization':
-            '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'
-      });
+      Response response = await post(url,
+          headers: {'Authorization': '${tokenType[0].toString().toUpperCase()}${tokenType.toString().substring(1).toLowerCase()} $accessToken'});
       Map json = jsonDecode(response.body);
       data = json;
     } catch (e) {

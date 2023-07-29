@@ -134,10 +134,7 @@ class _FetchEventState extends State<FetchEvent> {
   }
 
   void reminderModal(context, func) async {
-    dialogModal(
-        context,
-        "Are you sure you want to fetch ticket on this event? Previous data will be deleted!",
-        "Reminder", (ctx) async {
+    dialogModal(context, "Are you sure you want to fetch ticket on this event? Previous data will be deleted!", "Reminder", (ctx) async {
       func();
     }, widget.darkMode);
   }
@@ -148,17 +145,14 @@ class _FetchEventState extends State<FetchEvent> {
       await instance.deleteTicket(id);
     }
 
-    List eventData = items
-        .where((element) => element['ticketing_id'] == int.parse(model.text))
-        .toList();
+    List eventData = items.where((element) => element['ticketing_id'] == int.parse(model.text)).toList();
 
     setState(() {
       getDuration(tickets.length == 0 ? 5 : tickets.length);
       canTouch = false;
       backDrop();
       Timer(
-        Duration(
-            milliseconds: 1 * (tickets.length < 200 ? 700 : tickets.length)),
+        Duration(milliseconds: 1 * (tickets.length < 200 ? 700 : tickets.length)),
         () {
           setState(() {
             canTouch = true;
@@ -189,10 +183,7 @@ class _FetchEventState extends State<FetchEvent> {
 
     await instance.addEvent(event);
 
-    var list = List.generate(
-        tickets.length,
-        (index) =>
-            Ticket.toJson(tickets[index], int.parse(model.text)).toJson());
+    var list = List.generate(tickets.length, (index) => Ticket.toJson(tickets[index], int.parse(model.text)).toJson());
 
     await instance.addBulkTicket(list);
 
@@ -298,11 +289,8 @@ class _FetchEventState extends State<FetchEvent> {
                       width: width / 1.2,
                       child: CircleProgressBar(
                         foregroundColor: const Color(0xffE1B763),
-                        backgroundColor: widget.darkMode == true
-                            ? Colors.white
-                            : Colors.black12,
-                        value:
-                            duration.toString() == '0:00:00.000000' ? 0.0 : 1.0,
+                        backgroundColor: widget.darkMode == true ? Colors.white : Colors.black12,
+                        value: duration.toString() == '0:00:00.000000' ? 0.0 : 1.0,
                         animationDuration: duration,
                         strokeWidth: 15.0,
                         child: Center(
@@ -315,19 +303,14 @@ class _FetchEventState extends State<FetchEvent> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   CountAnimation(
-                                    count:
-                                        duration.toString() == '0:00:00.000000'
-                                            ? 0.00
-                                            : 100.00,
+                                    count: duration.toString() == '0:00:00.000000' ? 0.00 : 100.00,
                                     unit: '%',
                                     duration: duration,
                                     style: TextStyle(
                                       fontSize: 30.0,
                                       fontFamily: 'Spartan',
                                       fontWeight: FontWeight.w900,
-                                      color: widget.darkMode == true
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color: widget.darkMode == true ? Colors.white : Colors.black,
                                     ),
                                   ),
                                 ],
@@ -340,9 +323,7 @@ class _FetchEventState extends State<FetchEvent> {
                                 style: TextStyle(
                                   fontSize: 15.0,
                                   fontFamily: 'Spartan',
-                                  color: widget.darkMode == true
-                                      ? Colors.white
-                                      : Colors.black,
+                                  color: widget.darkMode == true ? Colors.white : Colors.black,
                                 ),
                               ),
                             ],
@@ -399,12 +380,10 @@ class _FetchEventState extends State<FetchEvent> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color:
-                                    const Color(0xffE1B763).withOpacity(0.75),
+                                color: const Color(0xffE1B763).withOpacity(0.75),
                                 spreadRadius: 1,
                                 blurRadius: !widget.darkMode ? 12 : 0,
-                                offset: const Offset(
-                                    0, 4), // changes x,y position of shadow
+                                offset: const Offset(0, 4), // changes x,y position of shadow
                               ),
                             ],
                             color: const Color(0xffE1B763),
@@ -414,8 +393,7 @@ class _FetchEventState extends State<FetchEvent> {
                           ),
                           child: Center(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: width >= 375 ? 8.0 : 5.0),
+                              padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                               child: Text(
                                 "FETCH TICKETS",
                                 style: TextStyle(

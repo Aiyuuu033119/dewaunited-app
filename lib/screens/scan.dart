@@ -66,8 +66,7 @@ class _ScanState extends State<Scan> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     decoration: BoxDecoration(
-                      color:
-                          !widget.darkMode ? Colors.white : Color(0xFF212529),
+                      color: !widget.darkMode ? Colors.white : Color(0xFF212529),
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
                       ),
@@ -75,9 +74,7 @@ class _ScanState extends State<Scan> {
                     margin: const EdgeInsets.symmetric(horizontal: 25.0),
                     width: width / 1.5,
                     child: Image(
-                      image: !widget.darkMode
-                          ? AssetImage('assets/images/qr.png')
-                          : AssetImage('assets/images/qr-white.png'),
+                      image: !widget.darkMode ? AssetImage('assets/images/qr.png') : AssetImage('assets/images/qr-white.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -99,12 +96,10 @@ class _ScanState extends State<Scan> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color:
-                                    const Color(0xffE1B763).withOpacity(0.75),
+                                color: const Color(0xffE1B763).withOpacity(0.75),
                                 spreadRadius: 1,
                                 blurRadius: !widget.darkMode ? 12 : 0,
-                                offset: const Offset(
-                                    0, 4), // changes x,y position of shadow
+                                offset: const Offset(0, 4), // changes x,y position of shadow
                               ),
                             ],
                             color: const Color(0xffE1B763),
@@ -114,8 +109,7 @@ class _ScanState extends State<Scan> {
                           ),
                           child: Center(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: width >= 375 ? 8.0 : 5.0),
+                              padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                               child: Text(
                                 "SCAN",
                                 style: TextStyle(
@@ -151,8 +145,7 @@ class _ScanState extends State<Scan> {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: textFieldInput('CODE', codeController, errorCode,
-                        hintCode, width, false, () {}),
+                    child: textFieldInput('CODE', codeController, errorCode, hintCode, width, false, () {}),
                   ),
                   const SizedBox(
                     height: 30.0,
@@ -182,32 +175,25 @@ class _ScanState extends State<Scan> {
                           width: width,
                           height: 60.0,
                           decoration: BoxDecoration(
-                            color: !widget.darkMode
-                                ? const Color(0xffFFFFFF)
-                                : Colors.transparent,
+                            color: !widget.darkMode ? const Color(0xffFFFFFF) : Colors.transparent,
                             borderRadius: const BorderRadius.all(
                               Radius.circular(35.0),
                             ),
                             border: Border.all(
-                              color: !widget.darkMode
-                                  ? Color(0xffE1B763)
-                                  : Color(0xffFFFFFF),
+                              color: !widget.darkMode ? Color(0xffE1B763) : Color(0xffFFFFFF),
                               width: 2.0,
                               style: BorderStyle.solid,
                             ),
                           ),
                           child: Center(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: width >= 375 ? 8.0 : 5.0),
+                              padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                               child: Text(
                                 "CHECK",
                                 style: TextStyle(
                                   fontSize: width >= 375 ? 15.0 : 13.0,
                                   fontFamily: 'Spartan',
-                                  color: !widget.darkMode
-                                      ? Color(0xffE1B763)
-                                      : Color(0xffFFFFFF),
+                                  color: !widget.darkMode ? Color(0xffE1B763) : Color(0xffFFFFFF),
                                 ),
                               ),
                             ),
@@ -248,14 +234,12 @@ class _ScanState extends State<Scan> {
         });
 
         TicketModel instanceTicket = TicketModel();
-        await instanceTicket.getSignature(
-            widget.accessToken, widget.tokenType, scanResult);
+        await instanceTicket.getSignature(widget.accessToken, widget.tokenType, scanResult);
 
         if (instanceTicket.data['error'] == true) {
           showToastWidget(
             Container(
-              padding:
-                  const EdgeInsets.only(top: 12.0, bottom: 12.0, left: 10.0),
+              padding: const EdgeInsets.only(top: 12.0, bottom: 12.0, left: 10.0),
               margin: const EdgeInsets.symmetric(horizontal: 25.0),
               decoration: BoxDecoration(
                 boxShadow: [
@@ -425,8 +409,7 @@ class _ScanState extends State<Scan> {
 
   Future<void> check() async {
     TicketModel instanceTicket = TicketModel();
-    await instanceTicket.getSignature(
-        widget.accessToken, widget.tokenType, codeController.text);
+    await instanceTicket.getSignature(widget.accessToken, widget.tokenType, codeController.text);
 
     if (instanceTicket.data['error'] == true) {
       setState(() {
