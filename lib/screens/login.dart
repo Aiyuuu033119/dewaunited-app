@@ -70,8 +70,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 60.0),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 60.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -87,17 +86,13 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           const SizedBox(
-                            height: 40.0,
+                            height: 30.0,
                           ),
                           SizedBox(
                             width: width,
                             child: const Text(
                               'Login',
-                              style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontFamily: 'Spartan',
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.black),
+                              style: TextStyle(fontSize: 30.0, fontFamily: 'Spartan', fontWeight: FontWeight.w900, color: Colors.black),
                             ),
                           ),
                           const SizedBox(
@@ -116,21 +111,19 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           const SizedBox(
-                            height: 45.0,
+                            height: 30.0,
                           ),
-                          textFieldInput('EMAIL', email, errorEmail, hintEmail,
-                              width, false, () {}),
+                          textFieldInput('EMAIL', email, errorEmail, hintEmail, width, false, () {}),
                           const SizedBox(
                             height: 15.0,
                           ),
-                          textFieldInput('PASSWORD', password, errorPass,
-                              hintPass, width, viewPassword, () {
+                          textFieldInput('PASSWORD', password, errorPass, hintPass, width, viewPassword, () {
                             setState(() {
                               viewPassword = !viewPassword;
                             });
                           }),
                           const SizedBox(
-                            height: 50.0,
+                            height: 20.0,
                           ),
                           SizedBox(
                             width: width,
@@ -147,12 +140,10 @@ class _LoginState extends State<Login> {
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
-                                        color: const Color(0xffE1B763)
-                                            .withOpacity(0.75),
+                                        color: const Color(0xffE1B763).withOpacity(0.75),
                                         spreadRadius: 1,
                                         blurRadius: 12,
-                                        offset: const Offset(0,
-                                            4), // changes x,y position of shadow
+                                        offset: const Offset(0, 4), // changes x,y position of shadow
                                       ),
                                     ],
                                     color: const Color(0xffE1B763),
@@ -174,8 +165,7 @@ class _LoginState extends State<Login> {
                                       ),
                                       const SizedBox(width: 8.0),
                                       const Image(
-                                        image: AssetImage(
-                                            'assets/images/arrow.png'),
+                                        image: AssetImage('assets/images/arrow.png'),
                                         fit: BoxFit.contain,
                                       ),
                                     ],
@@ -185,7 +175,7 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           const SizedBox(
-                            height: 30.0,
+                            height: 20.0,
                           ),
                           SizedBox(
                             width: width,
@@ -236,8 +226,7 @@ class _LoginState extends State<Login> {
     final prefs = await SharedPreferences.getInstance();
     var db = await openDatabase(prefs.getString("dbPath").toString());
 
-    var tableNames = (await db
-            .query('sqlite_master', where: 'type = ?', whereArgs: ['table']))
+    var tableNames = (await db.query('sqlite_master', where: 'type = ?', whereArgs: ['table']))
         .map((row) => row['name'] as String)
         .toList(growable: false)
       ..sort();
@@ -299,8 +288,7 @@ class _LoginState extends State<Login> {
     AuthModel instance = AuthModel();
     await instance.login(email.text, password.text);
     if (instance.data.isNotEmpty) {
-      if (instance.data['error'] == 'Unauthorized' ||
-          instance.data['error'] == true) {
+      if (instance.data['error'] == 'Unauthorized' || instance.data['error'] == true) {
         setState(() {
           email.text = "";
           hintEmail = 'Invalid email';
