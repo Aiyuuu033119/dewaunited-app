@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ScanOffline extends StatefulWidget {
   const ScanOffline({Key? key}) : super(key: key);
@@ -147,40 +148,36 @@ class _ScanOfflineState extends State<ScanOffline> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 60.0),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 60.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(
-                            height: 40.0,
+                            height: 25.0,
                           ),
-                          SizedBox(
-                            width: width,
-                            child: const Text(
-                              'Scan Offline',
-                              style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontFamily: 'Spartan',
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.black),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40.0),
+                            child: SizedBox(
+                              width: width,
+                              child: const Text(
+                                'Scan Offline',
+                                style: TextStyle(fontSize: 28.0, fontFamily: 'Spartan', fontWeight: FontWeight.w900, color: Colors.black),
+                              ),
                             ),
                           ),
                           const SizedBox(
-                            height: 50.0,
+                            height: 20.0,
                           ),
                           Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15.0),
                               ),
                             ),
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 25.0),
                             width: width / 1.5,
                             child: Image(
                               image: AssetImage('assets/images/qr.png'),
@@ -188,7 +185,7 @@ class _ScanOfflineState extends State<ScanOffline> {
                             ),
                           ),
                           const SizedBox(
-                            height: 35.0,
+                            height: 20.0,
                           ),
                           Container(
                             width: width,
@@ -200,16 +197,14 @@ class _ScanOfflineState extends State<ScanOffline> {
                                 },
                                 child: Container(
                                   width: width,
-                                  height: 60.0,
+                                  height: 40.0,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
-                                        color: const Color(0xffE1B763)
-                                            .withOpacity(0.75),
+                                        color: const Color(0xffE1B763).withOpacity(0.75),
                                         spreadRadius: 1,
                                         blurRadius: 12,
-                                        offset: const Offset(0,
-                                            4), // changes x,y position of shadow
+                                        offset: const Offset(0, 4), // changes x,y position of shadow
                                       ),
                                     ],
                                     color: const Color(0xffE1B763),
@@ -219,8 +214,7 @@ class _ScanOfflineState extends State<ScanOffline> {
                                   ),
                                   child: Center(
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: width >= 375 ? 8.0 : 5.0),
+                                      padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                                       child: Text(
                                         "SCAN",
                                         style: TextStyle(
@@ -236,7 +230,7 @@ class _ScanOfflineState extends State<ScanOffline> {
                             ),
                           ),
                           const SizedBox(
-                            height: 20.0,
+                            height: 15.0,
                           ),
                           SizedBox(
                             width: width,
@@ -252,12 +246,11 @@ class _ScanOfflineState extends State<ScanOffline> {
                             ),
                           ),
                           const SizedBox(
-                            height: 20.0,
+                            height: 15.0,
                           ),
-                          textFieldInput('CODE', codeController, errorCode,
-                              hintCode, width, false, () {}),
+                          textFieldInput('CODE', codeController, errorCode, hintCode, width, false, () {}),
                           const SizedBox(
-                            height: 30.0,
+                            height: 20.0,
                           ),
                           Container(
                             width: width,
@@ -269,6 +262,10 @@ class _ScanOfflineState extends State<ScanOffline> {
                                       ? setState(() {
                                           errorCode = true;
                                           hintCode = "Please input the code";
+
+                                          // Sound-Effect
+                                          final player = AudioPlayer();
+                                          player.play(AssetSource("audio/fail.mp3"));
                                         })
                                       : setState(() {
                                           errorCode = false;
@@ -281,7 +278,7 @@ class _ScanOfflineState extends State<ScanOffline> {
                                 },
                                 child: Container(
                                   width: width,
-                                  height: 60.0,
+                                  height: 40.0,
                                   decoration: BoxDecoration(
                                     color: const Color(0xffFFFFFF),
                                     borderRadius: const BorderRadius.all(
@@ -295,8 +292,7 @@ class _ScanOfflineState extends State<ScanOffline> {
                                   ),
                                   child: Center(
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: width >= 375 ? 8.0 : 5.0),
+                                      padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                                       child: Text(
                                         "CHECK",
                                         style: TextStyle(
@@ -310,9 +306,6 @@ class _ScanOfflineState extends State<ScanOffline> {
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30.0,
                           ),
                         ],
                       ),
@@ -348,14 +341,12 @@ class _ScanOfflineState extends State<ScanOffline> {
         DatabaseHelper instance = DatabaseHelper();
 
         var db = await instance.getDB();
-        var ticketQuery = await db
-            .query('ticket_tbl', where: 'code = ?', whereArgs: [scanResult]);
+        var ticketQuery = await db.query('ticket_tbl', where: 'code = ?', whereArgs: [scanResult]);
 
         if (ticketQuery.length == 0) {
           showToastWidget(
             Container(
-              padding:
-                  const EdgeInsets.only(top: 12.0, bottom: 12.0, left: 10.0),
+              padding: const EdgeInsets.only(top: 12.0, bottom: 12.0, left: 10.0),
               margin: const EdgeInsets.symmetric(horizontal: 25.0),
               decoration: BoxDecoration(
                 boxShadow: [
@@ -428,10 +419,12 @@ class _ScanOfflineState extends State<ScanOffline> {
             curve: Curves.elasticOut,
             reverseCurve: Curves.linear,
           );
+
+          // Sound-Effect
+          final player = AudioPlayer();
+          player.play(AssetSource("audio/fail.mp3"));
         } else {
-          var eventQuery = await db.query('event_tbl',
-              where: 'ticketing_id = ?',
-              whereArgs: [ticketQuery[0]['event_id']]);
+          var eventQuery = await db.query('event_tbl', where: 'ticketing_id = ?', whereArgs: [ticketQuery[0]['event_id']]);
 
           Navigator.push(
             context,
@@ -443,6 +436,10 @@ class _ScanOfflineState extends State<ScanOffline> {
               ),
             ),
           );
+
+          // Sound-Effect
+          final player = AudioPlayer();
+          player.play(AssetSource("audio/success.mp3"));
         }
       } else {
         showToastWidget(
@@ -530,8 +527,7 @@ class _ScanOfflineState extends State<ScanOffline> {
     DatabaseHelper instance = DatabaseHelper();
 
     var db = await instance.getDB();
-    var ticketQuery = await db.query('ticket_tbl',
-        where: 'code = ?', whereArgs: [codeController.text]);
+    var ticketQuery = await db.query('ticket_tbl', where: 'code = ?', whereArgs: [codeController.text]);
 
     if (ticketQuery.length == 0) {
       setState(() {
@@ -613,13 +609,16 @@ class _ScanOfflineState extends State<ScanOffline> {
         curve: Curves.elasticOut,
         reverseCurve: Curves.linear,
       );
+
+      // Sound-Effect
+      final player = AudioPlayer();
+      player.play(AssetSource("audio/fail.mp3"));
     } else {
       setState(() {
         codeController.text = '';
       });
 
-      var eventQuery = await db.query('event_tbl',
-          where: 'ticketing_id = ?', whereArgs: [ticketQuery[0]['event_id']]);
+      var eventQuery = await db.query('event_tbl', where: 'ticketing_id = ?', whereArgs: [ticketQuery[0]['event_id']]);
 
       Navigator.push(
         context,
@@ -631,6 +630,10 @@ class _ScanOfflineState extends State<ScanOffline> {
           ),
         ),
       );
+
+      // Sound-Effect
+      final player = AudioPlayer();
+      player.play(AssetSource("audio/success.mp3"));
     }
   }
 }

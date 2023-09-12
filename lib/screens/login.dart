@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
                                 },
                                 child: Container(
                                   width: 130.0,
-                                  height: 60.0,
+                                  height: 40.0,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(

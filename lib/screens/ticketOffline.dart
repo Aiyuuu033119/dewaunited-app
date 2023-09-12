@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class TicketOffline extends StatefulWidget {
   final String qrString;
@@ -132,7 +133,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
                       child: Container(
                         width: width,
-                        height: isPortrait ? height / 3.55 : width / 3.55,
+                        height: isPortrait ? height / 3.15 : width / 3.15,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
@@ -177,7 +178,6 @@ class _TicketOfflineState extends State<TicketOffline> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
-                                    Text(widget.eventData[0]['league_logo']),
                                     Container(
                                       width: isPortrait ? height / 10.5 : width / 10.5,
                                       child: widget.eventData[0]['league_logo'] != null
@@ -257,7 +257,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                   ),
                   Positioned(
                     width: width,
-                    top: isPortrait ? height / 2.5 : width / 2.5,
+                    top: isPortrait ? height / 2.1 : width / 2.1,
                     right: 0,
                     child: Padding(
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
@@ -553,6 +553,11 @@ class _TicketOfflineState extends State<TicketOffline> {
       await db.update('ticket_tbl', {'claimed_at': DateFormat('yyyy-MM-dd hh:mm:ss').format(now), 'sync': 1},
           where: 'ticketing_id = ?', whereArgs: [widget.ticketData[0]['ticketing_id']], conflictAlgorithm: ConflictAlgorithm.replace);
       Navigator.pop(ctx);
+
+      // Sound-Effect
+      final player = AudioPlayer();
+      player.play(AssetSource("audio/success.mp3"));
+
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);
         Navigator.pop(ctx);

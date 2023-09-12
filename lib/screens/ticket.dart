@@ -5,6 +5,7 @@ import 'package:dewaunited/compose/textTransform.dart';
 import 'package:dewaunited/models/ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Ticket extends StatefulWidget {
   final String qrString;
@@ -133,7 +134,7 @@ class _TicketState extends State<Ticket> {
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
                       child: Container(
                         width: width,
-                        height: isPortrait ? height / 3.55 : width / 3.55,
+                        height: isPortrait ? height / 3.15 : width / 3.15,
                         decoration: BoxDecoration(
                           color: !widget.darkMode ? Colors.white : Color(0xffE1B763),
                           boxShadow: [
@@ -256,7 +257,7 @@ class _TicketState extends State<Ticket> {
                   ),
                   Positioned(
                     width: width,
-                    top: isPortrait ? height / 2.5 : width / 2.5,
+                    top: isPortrait ? height / 2.1 : width / 2.1,
                     right: 0,
                     child: Padding(
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
@@ -546,6 +547,11 @@ class _TicketState extends State<Ticket> {
       TicketModel instanceTicket = TicketModel();
       await instanceTicket.ticketUpdate(widget.accessToken, widget.tokenType, widget.qrString);
       Navigator.pop(ctx);
+
+      // Sound-Effect
+      final player = AudioPlayer();
+      player.play(AssetSource("audio/success.mp3"));
+
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {
         Navigator.pop(ctx);
         Navigator.pop(ctx);

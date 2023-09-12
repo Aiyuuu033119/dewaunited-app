@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Scan extends StatefulWidget {
   final Map data;
@@ -161,6 +162,10 @@ class _ScanState extends State<Scan> {
                               ? setState(() {
                                   errorCode = true;
                                   hintCode = "Please input the code";
+
+                                  // Sound-Effect
+                                  final player = AudioPlayer();
+                                  player.play(AssetSource("audio/fail.mp3"));
                                 })
                               : setState(() {
                                   errorCode = false;
@@ -312,6 +317,10 @@ class _ScanState extends State<Scan> {
             curve: Curves.elasticOut,
             reverseCurve: Curves.linear,
           );
+
+          // Sound-Effect
+          final player = AudioPlayer();
+          player.play(AssetSource("audio/fail.mp3"));
         } else {
           Navigator.push(
             context,
@@ -324,6 +333,10 @@ class _ScanState extends State<Scan> {
                   darkMode: widget.darkMode),
             ),
           );
+
+          // Sound-Effect
+          final player = AudioPlayer();
+          player.play(AssetSource("audio/success.mp3"));
         }
       } else {
         showToastWidget(
@@ -491,6 +504,10 @@ class _ScanState extends State<Scan> {
         curve: Curves.elasticOut,
         reverseCurve: Curves.linear,
       );
+
+      // Sound-Effect
+      final player = AudioPlayer();
+      player.play(AssetSource("audio/fail.mp3"));
     } else {
       setState(() {
         codeController.text = '';
@@ -507,6 +524,10 @@ class _ScanState extends State<Scan> {
               darkMode: widget.darkMode),
         ),
       );
+
+      // Sound-Effect
+      final player = AudioPlayer();
+      player.play(AssetSource("audio/success.mp3"));
     }
   }
 }

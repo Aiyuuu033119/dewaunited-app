@@ -141,8 +141,7 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor:
-              widget.darkmode == true ? Color(0xff343A40) : Colors.white,
+          backgroundColor: widget.darkmode == true ? Color(0xff343A40) : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
           ),
@@ -168,12 +167,8 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
                               for (var i = 0; i < widget.items.length; i++)
                                 ListTile(
                                   onTap: () {
-                                    widget.result.text = widget.items[i]
-                                            [widget.itemLabel]
-                                        .toString();
-                                    widget.model.text = widget.items[i]
-                                            [widget.itemValue]
-                                        .toString();
+                                    widget.result.text = widget.items[i][widget.itemLabel].toString();
+                                    widget.model.text = widget.items[i][widget.itemValue].toString();
                                     Navigator.pop(context);
                                   },
                                   title: Container(
@@ -181,14 +176,11 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
                                     child: Row(
                                       children: <Widget>[
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 5.0),
+                                          padding: const EdgeInsets.only(left: 5.0),
                                           child: Text(
                                             widget.items[i][widget.itemLabel],
                                             style: TextStyle(
-                                              color: !widget.darkmode
-                                                  ? Colors.black
-                                                  : Colors.white,
+                                              color: !widget.darkmode ? Colors.black : Colors.white,
                                               fontSize: 15.0,
                                               fontFamily: 'Spartan',
                                             ),
@@ -223,29 +215,24 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
                               for (var i = 0; i < widget.items.length; i++)
                                 ListTile(
                                   onTap: () {
-                                    widget.result.text = widget.items[i]
-                                            [widget.itemLabel]
-                                        .toString();
-                                    widget.model.text = widget.items[i]
-                                            [widget.itemValue]
-                                        .toString();
+                                    widget.result.text = widget.items[i][widget.itemLabel].toString();
+                                    widget.model.text = widget.items[i][widget.itemValue].toString();
                                     Navigator.pop(context);
                                   },
                                   title: Container(
                                     height: 60.0,
                                     child: Row(
                                       children: <Widget>[
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 5.0),
-                                          child: Text(
-                                            widget.items[i][widget.itemLabel],
-                                            style: TextStyle(
-                                              color: !widget.darkmode
-                                                  ? Colors.black
-                                                  : Colors.white,
-                                              fontSize: 15.0,
-                                              fontFamily: 'Spartan',
+                                        Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 5.0),
+                                            child: Text(
+                                              widget.items[i][widget.itemLabel],
+                                              style: TextStyle(
+                                                color: !widget.darkmode ? Colors.black : Colors.white,
+                                                fontSize: 15.0,
+                                                fontFamily: 'Spartan',
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -281,14 +268,11 @@ class _TextFieldInputDialogState extends State<TextFieldInputDialog> {
                                   child: Row(
                                     children: <Widget>[
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 5.0),
+                                        padding: const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'No Data',
                                           style: TextStyle(
-                                            color: !widget.darkmode
-                                                ? Colors.black
-                                                : Colors.white,
+                                            color: !widget.darkmode ? Colors.black : Colors.white,
                                             fontSize: 15.0,
                                             fontFamily: 'Spartan',
                                           ),
