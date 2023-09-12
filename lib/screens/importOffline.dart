@@ -98,8 +98,7 @@ class _ImportOfflineState extends State<ImportOffline> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 60.0),
+                      padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 60.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -111,27 +110,21 @@ class _ImportOfflineState extends State<ImportOffline> {
                             width: width,
                             child: const Text(
                               'Import Database',
-                              style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontFamily: 'Spartan',
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.black),
+                              style: TextStyle(fontSize: 30.0, fontFamily: 'Spartan', fontWeight: FontWeight.w900, color: Colors.black),
                             ),
                           ),
                           const SizedBox(
                             height: 50.0,
                           ),
                           Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15.0),
                               ),
                             ),
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 25.0),
                             width: width / 1.5,
                             child: Image(
                               image: AssetImage('assets/images/db.png'),
@@ -155,12 +148,10 @@ class _ImportOfflineState extends State<ImportOffline> {
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
-                                        color: const Color(0xffE1B763)
-                                            .withOpacity(0.75),
+                                        color: const Color(0xffE1B763).withOpacity(0.75),
                                         spreadRadius: 1,
                                         blurRadius: 12,
-                                        offset: const Offset(0,
-                                            4), // changes x,y position of shadow
+                                        offset: const Offset(0, 4), // changes x,y position of shadow
                                       ),
                                     ],
                                     color: const Color(0xffE1B763),
@@ -170,8 +161,7 @@ class _ImportOfflineState extends State<ImportOffline> {
                                   ),
                                   child: Center(
                                     child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: width >= 375 ? 8.0 : 5.0),
+                                      padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                                       child: Text(
                                         "IMPORT",
                                         style: TextStyle(
@@ -203,7 +193,7 @@ class _ImportOfflineState extends State<ImportOffline> {
   }
 
   void openFile() async {
-    final prefs = await SharedPreferences.getInstance();
+    await SharedPreferences.getInstance();
     var result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
     );
@@ -389,8 +379,7 @@ class _ImportOfflineState extends State<ImportOffline> {
 
       directory = Directory(newPath + "/media/com.example.dewaunited/Backup");
 
-      File oldFile = File(
-          newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
+      File oldFile = File(newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
       File saveFile = File(url);
 
       // ignore: unrelated_type_equality_checks
@@ -398,8 +387,7 @@ class _ImportOfflineState extends State<ImportOffline> {
         await oldFile.delete();
       }
 
-      await saveFile.copy(
-          newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
+      await saveFile.copy(newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
 
       return saveFile;
     } catch (e) {

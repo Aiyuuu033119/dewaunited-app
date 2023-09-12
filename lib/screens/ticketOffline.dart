@@ -550,7 +550,7 @@ class _TicketOfflineState extends State<TicketOffline> {
       DatabaseHelper instance = DatabaseHelper();
 
       var db = await instance.getDB();
-      var ticketUpdate = await db.update('ticket_tbl', {'claimed_at': DateFormat('yyyy-MM-dd hh:mm:ss').format(now), 'sync': 1},
+      await db.update('ticket_tbl', {'claimed_at': DateFormat('yyyy-MM-dd hh:mm:ss').format(now), 'sync': 1},
           where: 'ticketing_id = ?', whereArgs: [widget.ticketData[0]['ticketing_id']], conflictAlgorithm: ConflictAlgorithm.replace);
       Navigator.pop(ctx);
       dialogModal(context, "Successfully Claimed!", "Success", (ctx) async {

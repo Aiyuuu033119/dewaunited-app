@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(
-                            height: 20.0,
+                            height: 10.0,
                           ),
                           SizedBox(
                             width: width / 2.7,
@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           const SizedBox(
-                            height: 30.0,
+                            height: 20.0,
                           ),
                           textFieldInput('EMAIL', email, errorEmail, hintEmail, width, false, () {}),
                           const SizedBox(

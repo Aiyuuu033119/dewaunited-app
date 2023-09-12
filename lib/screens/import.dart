@@ -13,12 +13,7 @@ class ImportEvent extends StatefulWidget {
   final String tokenType;
   final bool darkMode;
 
-  const ImportEvent(
-      {super.key,
-      required this.data,
-      required this.accessToken,
-      required this.tokenType,
-      required this.darkMode});
+  const ImportEvent({super.key, required this.data, required this.accessToken, required this.tokenType, required this.darkMode});
 
   @override
   State<ImportEvent> createState() => _ImportEventState();
@@ -70,12 +65,10 @@ class _ImportEventState extends State<ImportEvent> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color:
-                                    const Color(0xffE1B763).withOpacity(0.75),
+                                color: const Color(0xffE1B763).withOpacity(0.75),
                                 spreadRadius: 1,
                                 blurRadius: !widget.darkMode ? 12 : 0,
-                                offset: const Offset(
-                                    0, 4), // changes x,y position of shadow
+                                offset: const Offset(0, 4), // changes x,y position of shadow
                               ),
                             ],
                             color: const Color(0xffE1B763),
@@ -85,8 +78,7 @@ class _ImportEventState extends State<ImportEvent> {
                           ),
                           child: Center(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: width >= 375 ? 8.0 : 5.0),
+                              padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                               child: Text(
                                 "IMPORT DATABASE",
                                 style: TextStyle(
@@ -111,7 +103,7 @@ class _ImportEventState extends State<ImportEvent> {
   }
 
   void openFile() async {
-    final prefs = await SharedPreferences.getInstance();
+    await SharedPreferences.getInstance();
     var result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
     );
@@ -297,8 +289,7 @@ class _ImportEventState extends State<ImportEvent> {
 
       directory = Directory(newPath + "/media/com.example.dewaunited/Backup");
 
-      File oldFile = File(
-          newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
+      File oldFile = File(newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
       File saveFile = File(url);
 
       // ignore: unrelated_type_equality_checks
@@ -306,8 +297,7 @@ class _ImportEventState extends State<ImportEvent> {
         await oldFile.delete();
       }
 
-      await saveFile.copy(
-          newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
+      await saveFile.copy(newPath + "/media/com.example.dewaunited/Database/dewaunited.db");
 
       return saveFile;
     } catch (e) {
