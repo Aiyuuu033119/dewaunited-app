@@ -133,7 +133,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
                       child: Container(
                         width: width,
-                        height: isPortrait ? height / 3.15 : width / 3.15,
+                        height: isPortrait ? height / 2.85 : width / 2.85,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
@@ -250,6 +250,21 @@ class _TicketOfflineState extends State<TicketOffline> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(
+                                widget.ticketData.isNotEmpty ? 'No. HP: ${widget.ticketData[0]['phone']}' : '---- ---',
+                                style: TextStyle(
+                                  fontSize: 11.0,
+                                  fontFamily: 'Spartan',
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF634D23),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -257,7 +272,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                   ),
                   Positioned(
                     width: width,
-                    top: isPortrait ? height / 2.1 : width / 2.1,
+                    top: isPortrait ? height / 1.95 : width / 1.95,
                     right: 0,
                     child: Padding(
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10),

@@ -134,7 +134,7 @@ class _TicketState extends State<Ticket> {
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
                       child: Container(
                         width: width,
-                        height: isPortrait ? height / 3.15 : width / 3.15,
+                        height: isPortrait ? height / 2.85 : width / 2.85,
                         decoration: BoxDecoration(
                           color: !widget.darkMode ? Colors.white : Color(0xffE1B763),
                           boxShadow: [
@@ -250,6 +250,20 @@ class _TicketState extends State<Ticket> {
                                     color: !widget.darkMode ? Colors.black : Colors.white),
                               ),
                             ),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(
+                                widget.ticketData.isNotEmpty ? 'No. HP: ${widget.ticketData['phone']}' : '---- ---',
+                                style: TextStyle(
+                                    fontSize: 11.0,
+                                    fontFamily: 'Spartan',
+                                    fontWeight: FontWeight.w600,
+                                    color: !widget.darkMode ? Colors.black : Colors.white),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -257,7 +271,7 @@ class _TicketState extends State<Ticket> {
                   ),
                   Positioned(
                     width: width,
-                    top: isPortrait ? height / 2.1 : width / 2.1,
+                    top: isPortrait ? height / 1.95 : width / 1.95,
                     right: 0,
                     child: Padding(
                       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 10),
