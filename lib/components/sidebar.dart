@@ -7,12 +7,7 @@ class Sidebar extends StatelessWidget {
   final bool darkmode;
 
   // ignore: prefer_const_constructors_in_immutables
-  Sidebar(
-      {Key? key,
-      required this.darkmode,
-      required this.active,
-      required this.onTap})
-      : super(key: key);
+  Sidebar({Key? key, required this.darkmode, required this.active, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,37 +45,33 @@ class Sidebar extends StatelessWidget {
             const SizedBox(
               height: 40.0,
             ),
+            // Container(
+            //   color: active == 0 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
+            //   child: ListTile(
+            //     contentPadding: const EdgeInsets.symmetric(
+            //       horizontal: 20.0,
+            //     ),
+            //     title: Text(
+            //       'Scan QR Code',
+            //       style: TextStyle(
+            //         color: active == 0
+            //             ? Colors.white
+            //             : !darkmode
+            //                 ? Colors.black
+            //                 : Colors.white,
+            //         fontSize: 15.0,
+            //         fontWeight: active == 0 ? FontWeight.w600 : FontWeight.w100,
+            //         fontFamily: 'Spartan',
+            //       ),
+            //     ),
+            //     onTap: () => onTap(
+            //       context,
+            //       0,
+            //     ),
+            //   ),
+            // ),
             Container(
-              color: active == 0
-                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
-                  : Colors.transparent,
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                ),
-                title: Text(
-                  'Scan QR Code',
-                  style: TextStyle(
-                    color: active == 0
-                        ? Colors.white
-                        : !darkmode
-                            ? Colors.black
-                            : Colors.white,
-                    fontSize: 15.0,
-                    fontWeight: active == 0 ? FontWeight.w600 : FontWeight.w100,
-                    fontFamily: 'Spartan',
-                  ),
-                ),
-                onTap: () => onTap(
-                  context,
-                  0,
-                ),
-              ),
-            ),
-            Container(
-              color: active == 1
-                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
-                  : Colors.transparent,
+              color: active == 1 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
               child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
@@ -105,9 +96,7 @@ class Sidebar extends StatelessWidget {
               ),
             ),
             Container(
-              color: active == 2
-                  ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40))
-                  : Colors.transparent,
+              color: active == 2 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
               child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
@@ -194,8 +183,7 @@ class Sidebar extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text:
-                                ' ${DateFormat('yyyy').format(DateTime.now())} ',
+                            text: ' ${DateFormat('yyyy').format(DateTime.now())} ',
                             style: TextStyle(
                               height: 1.4,
                               letterSpacing: 1.0,
