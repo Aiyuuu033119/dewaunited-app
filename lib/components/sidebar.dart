@@ -71,7 +71,7 @@ class Sidebar extends StatelessWidget {
             //   ),
             // ),
             Container(
-              color: active == 1 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
+              color: active == 0 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
               child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
@@ -79,7 +79,7 @@ class Sidebar extends StatelessWidget {
                 title: Text(
                   'Fetch Event',
                   style: TextStyle(
-                    color: active == 1
+                    color: active == 0
                         ? Colors.white
                         : !darkmode
                             ? Colors.black
@@ -91,12 +91,12 @@ class Sidebar extends StatelessWidget {
                 ),
                 onTap: () => onTap(
                   context,
-                  1,
+                  0,
                 ),
               ),
             ),
             Container(
-              color: active == 2 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
+              color: active == 1 ? (!darkmode ? Color(0xffF5C666) : Color(0xFF343A40)) : Colors.transparent,
               child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
@@ -104,7 +104,7 @@ class Sidebar extends StatelessWidget {
                 title: Text(
                   'Sync Ticket',
                   style: TextStyle(
-                    color: active == 2
+                    color: active == 1
                         ? Colors.white
                         : !darkmode
                             ? Colors.black
@@ -116,7 +116,7 @@ class Sidebar extends StatelessWidget {
                 ),
                 onTap: () => onTap(
                   context,
-                  2,
+                  1,
                 ),
               ),
             ),

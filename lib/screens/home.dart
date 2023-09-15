@@ -15,8 +15,7 @@ import 'package:flutter/services.dart';
 class Home extends StatefulWidget {
   final int? isStillLogin;
   final int active;
-  const Home({Key? key, this.isStillLogin, required this.active})
-      : super(key: key);
+  const Home({Key? key, this.isStillLogin, required this.active}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -54,16 +53,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    bool isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     List<Widget> pages = [
-      Scan(
-        data: data,
-        accessToken: accessToken,
-        tokenType: tokenType,
-        darkMode: darkMode,
-      ),
+      // Scan(
+      //   data: data,
+      //   accessToken: accessToken,
+      //   tokenType: tokenType,
+      //   darkMode: darkMode,
+      // ),
       FetchEvent(
         data: data,
         accessToken: accessToken,
@@ -135,9 +133,7 @@ class _HomeState extends State<Home> {
                   iconSize: 30.0,
                   icon: SizedBox(
                     child: Image(
-                      image: !darkMode
-                          ? AssetImage('assets/images/moon.png')
-                          : AssetImage('assets/images/sun.png'),
+                      image: !darkMode ? AssetImage('assets/images/moon.png') : AssetImage('assets/images/sun.png'),
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -155,8 +151,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        body:
-            accessToken != "" && accessToken != "" ? pages[index] : SizedBox(),
+        body: accessToken != "" && accessToken != "" ? pages[index] : SizedBox(),
       ),
     );
   }
@@ -351,8 +346,7 @@ class _HomeState extends State<Home> {
   }
 
   void logoutModel(context) async {
-    dialogModal(context, "Are you sure you want to logout?", "Reminder",
-        (ctx) async {
+    dialogModal(context, "Are you sure you want to logout?", "Reminder", (ctx) async {
       AuthModel instance = AuthModel();
       await instance.logout(accessToken, tokenType);
       if (instance.data['message'] == "User successfully logged out.") {

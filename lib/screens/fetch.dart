@@ -244,6 +244,7 @@ class _FetchEventState extends State<FetchEvent> {
                         fontFamily: 'Spartan',
                         fontWeight: FontWeight.w700,
                         color: Color(0xffA2A4A3),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
