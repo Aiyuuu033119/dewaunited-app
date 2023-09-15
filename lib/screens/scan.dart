@@ -144,9 +144,117 @@ class _ScanState extends State<Scan> {
                   const SizedBox(
                     height: 30.0,
                   ),
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  //   child: textFieldInput('CODE', codeController, errorCode, hintCode, width, false, () {}),
+                  // ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: textFieldInput('CODE', codeController, errorCode, hintCode, width, false, () {}),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.12),
+                          spreadRadius: 2,
+                          blurRadius: 14,
+                          offset: const Offset(3, 4), // changes x,y position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Container(
+                          width: width,
+                          height: 14.0,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(10.0),
+                            ),
+                          ),
+                          child: const Text(''),
+                        ),
+                        SizedBox(
+                          height: 45.0,
+                          child: TextField(
+                            // cursorHeight: 16.0,
+                            onChanged: (value) async {
+                              value.isEmpty == true
+                                  ? setState(() {
+                                      errorCode = true;
+                                      hintCode = "Please input the code";
+
+                                      // Sound-Effect
+                                      final player = AudioPlayer();
+                                      player.play(AssetSource("audio/fail.mp3"));
+                                    })
+                                  : setState(() {
+                                      errorCode = false;
+                                      hintCode = "";
+                                    });
+
+                              if (!errorCode) {
+                                check();
+                              }
+                            },
+                            controller: codeController,
+                            obscureText: errorCode,
+                            autofocus: true,
+                            style: const TextStyle(
+                              fontFamily: 'Spartan',
+                              fontSize: 13.0,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFFA2A4A3),
+                            ),
+                            decoration: InputDecoration(
+                              labelText: 'CODE',
+                              labelStyle: const TextStyle(
+                                fontFamily: 'Spartan',
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w800,
+                                color: Color(0xFFA2A4A3),
+                              ),
+                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              hintText: hintCode,
+                              hintStyle: const TextStyle(
+                                fontFamily: 'Spartan',
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFFD6D6D6),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              prefixIcon: const Padding(
+                                padding: EdgeInsets.only(bottom: 16.0, top: 2.0),
+                                child: Image(
+                                  image: AssetImage('assets/images/qr-icon.png'),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              contentPadding: const EdgeInsets.only(bottom: 0.0),
+                              enabledBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 30.0,

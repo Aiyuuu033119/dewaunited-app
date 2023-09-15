@@ -248,7 +248,7 @@ class _LoginState extends State<Login> {
     // ignore: unrelated_type_equality_checks
     if (!ticket.contains('ticket_tbl')) {
       await db.execute(
-          "CREATE TABLE ticket_tbl( id INTEGER PRIMARY KEY AUTOINCREMENT, event_id TEXT, ticketing_id TEXT, code TEXT, name TEXT, category TEXT, seat_type TEXT, claimed_at TEXT, sync TEXT)");
+          "CREATE TABLE ticket_tbl( id INTEGER PRIMARY KEY AUTOINCREMENT, event_id TEXT, ticketing_id TEXT, code TEXT, name TEXT, phone TEXT, category TEXT, seat_type TEXT, claimed_at TEXT, sync TEXT, no TEXT)");
     }
   }
 

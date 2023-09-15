@@ -241,7 +241,9 @@ class _TicketOfflineState extends State<TicketOffline> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty ? 'Spectator: ${widget.ticketData[0]['name']}' : '---- ---',
+                                widget.ticketData[0]['name'] != null
+                                    ? 'Spectator: ${widget.ticketData[0]['name']}'
+                                    : 'Spectator: PSDU #${widget.ticketData[0]['no']}',
                                 style: TextStyle(
                                   fontSize: 11.0,
                                   fontFamily: 'Spartan',
@@ -256,7 +258,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty ? 'No. HP: ${widget.ticketData[0]['phone']}' : '---- ---',
+                                widget.ticketData[0]['phone'] != null ? 'No. HP: ${widget.ticketData[0]['phone']}' : 'No. HP: -',
                                 style: TextStyle(
                                   fontSize: 11.0,
                                   fontFamily: 'Spartan',

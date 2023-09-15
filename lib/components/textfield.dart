@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget textFieldInput(String label, TextEditingController result, bool error,
-    String hint, width, bool obsecure, Function view) {
+Widget textFieldInput(String label, TextEditingController result, bool error, String hint, width, bool obsecure, Function view) {
   return Container(
     decoration: BoxDecoration(
       boxShadow: [
@@ -33,7 +32,7 @@ Widget textFieldInput(String label, TextEditingController result, bool error,
             // cursorHeight: 16.0,
             controller: result,
             obscureText: obsecure ? true : false,
-            autofocus: false,
+            autofocus: true,
             style: const TextStyle(
               fontFamily: 'Spartan',
               fontSize: 13.0,
@@ -89,25 +88,16 @@ Widget textFieldInput(String label, TextEditingController result, bool error,
                       },
                       child: obsecure
                           ? const Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: 18.0,
-                                  top: 2.0,
-                                  left: 5.0,
-                                  right: 5.0),
+                              padding: EdgeInsets.only(bottom: 18.0, top: 2.0, left: 5.0, right: 5.0),
                               child: Image(
                                 image: AssetImage('assets/images/eye.png'),
                                 fit: BoxFit.contain,
                               ),
                             )
                           : const Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: 13.0,
-                                  top: 4.0,
-                                  left: 5.0,
-                                  right: 5.0),
+                              padding: EdgeInsets.only(bottom: 13.0, top: 4.0, left: 5.0, right: 5.0),
                               child: Image(
-                                image:
-                                    AssetImage('assets/images/eye-close.png'),
+                                image: AssetImage('assets/images/eye-close.png'),
                                 fit: BoxFit.contain,
                               ),
                             ),

@@ -242,7 +242,9 @@ class _TicketState extends State<Ticket> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty ? 'Spectator: ${widget.ticketData['name']}' : '---- ---',
+                                widget.ticketData['name'] != null
+                                    ? 'Spectator: ${widget.ticketData['name']}'
+                                    : 'Spectator: PSDU #${widget.ticketData['no']}',
                                 style: TextStyle(
                                     fontSize: 11.0,
                                     fontFamily: 'Spartan',
@@ -256,7 +258,7 @@ class _TicketState extends State<Ticket> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty ? 'No. HP: ${widget.ticketData['phone']}' : '---- ---',
+                                widget.ticketData['phone'] != null ? 'No. HP: ${widget.ticketData['phone']}' : 'No. HP: -',
                                 style: TextStyle(
                                     fontSize: 11.0,
                                     fontFamily: 'Spartan',
@@ -507,7 +509,7 @@ class _TicketState extends State<Ticket> {
                                 height: 40.0,
                               ),
                             if (widget.ticketData.isNotEmpty)
-                              if (widget.ticketData['claimed_at'] == null)
+                              if (widget.ticketData['claimed_at'] == null || widget.ticketData['claimed_at'] == "")
                                 GestureDetector(
                                   onTap: () async {
                                     claim(widget.darkMode);
