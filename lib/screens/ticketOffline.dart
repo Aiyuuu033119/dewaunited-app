@@ -41,7 +41,7 @@ class _TicketOfflineState extends State<TicketOffline> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height + 120.0;
     double width = MediaQuery.of(context).size.width;
     bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
@@ -303,7 +303,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                    width: width / 4,
+                                    width: width / 6.5,
                                     child: Column(
                                       children: [
                                         if (widget.eventData.isNotEmpty)
@@ -341,7 +341,7 @@ class _TicketOfflineState extends State<TicketOffline> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: width / 4.5,
+                                    width: width / 6.5,
                                     child: Column(
                                       children: [
                                         if (widget.ticketData.isNotEmpty)

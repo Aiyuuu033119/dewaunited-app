@@ -43,7 +43,7 @@ class _TicketState extends State<Ticket> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height + 120.0;
     double width = MediaQuery.of(context).size.width;
     bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
