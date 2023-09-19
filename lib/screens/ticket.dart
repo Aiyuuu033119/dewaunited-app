@@ -491,11 +491,15 @@ class _TicketState extends State<Ticket> {
                             ),
                             Container(
                               color: widget.ticketData.isNotEmpty
-                                  ? (widget.ticketData['claimed_at'] == null ? Colors.red : Color(0xFF8A7346))
+                                  ? (widget.ticketData['claimed_at'] == null || widget.ticketData[0]['claimed_at'] == ""
+                                      ? Colors.red
+                                      : Color(0xFF8A7346))
                                   : Color(0xFF8A7346),
                               padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                               child: Text(
-                                widget.ticketData.isNotEmpty ? (widget.ticketData['claimed_at'] == null ? 'Not Claim' : 'Claim') : '-----',
+                                widget.ticketData.isNotEmpty
+                                    ? (widget.ticketData['claimed_at'] == null || widget.ticketData[0]['claimed_at'] == "" ? 'Not Claim' : 'Claim')
+                                    : '-----',
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 8.0,

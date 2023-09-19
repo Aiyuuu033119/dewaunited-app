@@ -5,7 +5,7 @@ import 'package:dewaunited/compose/checkAuth.dart';
 import 'package:dewaunited/models/auth.dart';
 import 'package:dewaunited/screens/fetch.dart';
 import 'package:dewaunited/screens/login.dart';
-import 'package:dewaunited/screens/scan.dart';
+// import 'package:dewaunited/screens/scan.dart';
 import 'package:dewaunited/screens/sync.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';

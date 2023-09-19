@@ -9,8 +9,8 @@ import 'package:dewaunited/compose/back.dart';
 import 'package:flutter/services.dart';
 import 'package:circle_progress_bar/circle_progress_bar.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
-
 // import 'package:sqflite/sqflite.dart';
+
 class SyncTicket extends StatefulWidget {
   final Map data;
   final String accessToken;
@@ -36,6 +36,9 @@ class _SyncTicketState extends State<SyncTicket> {
   Duration duration = Duration(seconds: 0);
 
   DateTime now = DateTime.now();
+
+  var totalTicket = [];
+  List countClaimedTicket = [];
 
   @override
   void initState() {
@@ -96,29 +99,34 @@ class _SyncTicketState extends State<SyncTicket> {
       reminderModal(context, () {
         Navigator.pop(context);
         saveFetchData(db, eventQuery[0]['ticketing_id']);
+        getCountClaimedTicket();
       });
     }
   }
 
   void reminderModal(context, func) async {
-    dialogModal(
-        context, "Are you sure you want to sync all the tickets?", "Reminder",
-        (ctx) async {
+    dialogModal(context, "Are you sure you want to sync all the tickets?", "Reminder", (ctx) async {
       func();
     }, widget.darkMode);
+  }
+
+  void getCountClaimedTicket() async {
+    DatabaseHelper instance = DatabaseHelper();
+    var db = await instance.getDB();
+
+    totalTicket = await db.rawQuery("SELECT count(*) as total_ticket FROM ticket_tbl");
+    countClaimedTicket = await db.rawQuery("SELECT seat_type, COUNT(*) AS count_claimed FROM ticket_tbl WHERE sync=1 GROUP BY seat_type");
   }
 
   void saveFetchData(db, id) async {
     // var ticketQuery = await db.query('ticket_tbl');
 
-    var ticketQuery = await db.query('ticket_tbl',
-        where: 'event_id = ? AND sync = ?', whereArgs: [id, 1]);
+    var ticketQuery = await db.query('ticket_tbl', where: 'event_id = ? AND sync = ?', whereArgs: [id, 1]);
 
     if (ticketQuery.length == 0) {
       warningToast();
     } else {
-      var list = List.generate(ticketQuery.length,
-          (index) => Ticket.toSync(ticketQuery[index], int.parse(id)).toSync());
+      var list = List.generate(ticketQuery.length, (index) => Ticket.toSync(ticketQuery[index], int.parse(id)).toSync());
 
       setState(() {
         getDuration(list.length == 0 ? 5 : list.length);
@@ -137,8 +145,7 @@ class _SyncTicketState extends State<SyncTicket> {
       });
 
       FetchModel instance = FetchModel();
-      await instance.syncTicket(
-          widget.accessToken, widget.tokenType, context, list);
+      await instance.syncTicket(widget.accessToken, widget.tokenType, context, list);
 
       if (instance.data['status'] == true) {
         showToastWidget(
@@ -323,11 +330,8 @@ class _SyncTicketState extends State<SyncTicket> {
                     width: width / 1.2,
                     child: CircleProgressBar(
                       foregroundColor: const Color(0xffE1B763),
-                      backgroundColor: widget.darkMode == true
-                          ? Colors.white
-                          : Colors.black12,
-                      value:
-                          duration.toString() == '0:00:00.000000' ? 0.0 : 1.0,
+                      backgroundColor: widget.darkMode == true ? Colors.white : Colors.black12,
+                      value: duration.toString() == '0:00:00.000000' ? 0.0 : 1.0,
                       animationDuration: duration,
                       strokeWidth: 15.0,
                       child: Center(
@@ -340,18 +344,14 @@ class _SyncTicketState extends State<SyncTicket> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CountAnimation(
-                                  count: duration.toString() == '0:00:00.000000'
-                                      ? 0.00
-                                      : 100.00,
+                                  count: duration.toString() == '0:00:00.000000' ? 0.00 : 100.00,
                                   unit: '%',
                                   duration: duration,
                                   style: TextStyle(
                                     fontSize: 30.0,
                                     fontFamily: 'Spartan',
                                     fontWeight: FontWeight.w900,
-                                    color: widget.darkMode == true
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color: widget.darkMode == true ? Colors.white : Colors.black,
                                   ),
                                 ),
                               ],
@@ -364,9 +364,7 @@ class _SyncTicketState extends State<SyncTicket> {
                               style: TextStyle(
                                 fontSize: 15.0,
                                 fontFamily: 'Spartan',
-                                color: widget.darkMode == true
-                                    ? Colors.white
-                                    : Colors.black,
+                                color: widget.darkMode == true ? Colors.white : Colors.black,
                               ),
                             ),
                           ],
@@ -394,12 +392,10 @@ class _SyncTicketState extends State<SyncTicket> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color:
-                                    const Color(0xffE1B763).withOpacity(0.75),
+                                color: const Color(0xffE1B763).withOpacity(0.75),
                                 spreadRadius: 1,
                                 blurRadius: !widget.darkMode ? 12 : 0,
-                                offset: const Offset(
-                                    0, 4), // changes x,y position of shadow
+                                offset: const Offset(0, 4), // changes x,y position of shadow
                               ),
                             ],
                             color: const Color(0xffE1B763),
@@ -409,8 +405,7 @@ class _SyncTicketState extends State<SyncTicket> {
                           ),
                           child: Center(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: width >= 375 ? 8.0 : 5.0),
+                              padding: EdgeInsets.only(top: width >= 375 ? 8.0 : 5.0),
                               child: Text(
                                 "Sync Tickets",
                                 style: TextStyle(
@@ -422,6 +417,34 @@ class _SyncTicketState extends State<SyncTicket> {
                             ),
                           ),
                         ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: totalTicket.isNotEmpty == true,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Text(
+                        totalTicket.isNotEmpty ? "Total Ticket: ${totalTicket[0]['total_ticket']}" : "",
+                        style: TextStyle(
+                          fontSize: width >= 375 ? 15.0 : 13.0,
+                          fontFamily: 'Spartan',
+                          color: widget.darkMode == true ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Visibility(
+                    visible: countClaimedTicket.isNotEmpty == true,
+                    child: Text(
+                      countClaimedTicket.isNotEmpty ? "${countClaimedTicket[0]['seat_type']}: ${countClaimedTicket[0]['count_claimed']} claimed" : "",
+                      style: TextStyle(
+                        fontSize: width >= 375 ? 15.0 : 13.0,
+                        fontFamily: 'Spartan',
+                        color: widget.darkMode == true ? Colors.white : Colors.black,
                       ),
                     ),
                   ),

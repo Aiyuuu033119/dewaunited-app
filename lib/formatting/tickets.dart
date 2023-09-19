@@ -8,7 +8,7 @@ class Ticket {
   final String category;
   final String seatType;
   final dynamic sync;
-  final int? no;
+  final dynamic no;
 
   const Ticket({
     required this.eventID,

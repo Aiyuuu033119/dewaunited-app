@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       final prefs = await SharedPreferences.getInstance();
 
       if (Platform.isAndroid) {
-        if (await _requestPermission(Permission.storage)) {
+        if (await _requestPermission(Permission.storage) == true) {
           directory = await getExternalStorageDirectory();
           String newPath = "";
           List paths = directory!.path.split("/");
@@ -90,15 +91,39 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<bool> _requestPermission(Permission permission) async {
-    if (await permission.isGranted) {
-      return true;
-    } else {
-      var result = await permission.request();
-      if (result == PermissionStatus.granted) {
+    AndroidDeviceInfo build = await DeviceInfoPlugin().androidInfo;
+
+    if (build.version.sdkInt >= 30) {
+      var req = await Permission.manageExternalStorage.request();
+
+      if (req.isGranted) {
         return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (await permission.isGranted) {
+        return true;
+      } else {
+        var result = await permission.request();
+
+        if (result.isGranted) {
+          return true;
+        } else {
+          return false;
+        }
       }
     }
-    return false;
+
+    // if (await permission.isGranted) {
+    //   return true;
+    // } else {
+    //   var result = await permission.request();
+    //   if (result == PermissionStatus.granted) {
+    //     return true;
+    //   }
+    // }
+    // return false;
   }
 
   saveDatabase() async {

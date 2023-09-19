@@ -7,8 +7,8 @@ class FetchModel {
   late Map data;
   late String msg;
 
-  String ticketBaseUrl = 'https://dwunss.com/api/ticket/v2';
-  // String ticketBaseUrl = 'https://du-front-api.woibayar.com/api/ticket/v2';
+  // String ticketBaseUrl = 'https://dwunss.com/api/ticket/v2';
+  String ticketBaseUrl = 'https://du-front-api.woibayar.com/api/ticket/v2';
 
   Future<void> getEvents(accessToken, tokenType, context) async {
     try {

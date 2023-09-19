@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:dewaunited/components/textfield.dart';
+// import 'package:dewaunited/components/textfield.dart';
 import 'package:dewaunited/compose/back.dart';
 import 'package:dewaunited/models/databaseHelper.dart';
 import 'package:dewaunited/screens/importOffline.dart';
@@ -546,9 +546,15 @@ class _ScanOfflineState extends State<ScanOffline> {
             ),
           );
 
-          // Sound-Effect
-          final player = AudioPlayer();
-          player.play(AssetSource("audio/success.mp3"));
+          if (ticketQuery[0]['claimed_at'] == null || ticketQuery[0]['claimed_at'] == "") {
+            // Sound-Effect
+            final player = AudioPlayer();
+            player.play(AssetSource("audio/success.mp3"));
+          } else {
+            // Sound-Effect
+            final player = AudioPlayer();
+            player.play(AssetSource("audio/fail.mp3"));
+          }
         }
       } else {
         showToastWidget(
@@ -740,9 +746,15 @@ class _ScanOfflineState extends State<ScanOffline> {
         ),
       );
 
-      // Sound-Effect
-      final player = AudioPlayer();
-      player.play(AssetSource("audio/success.mp3"));
+      if (ticketQuery[0]['claimed_at'] == null || ticketQuery[0]['claimed_at'] == "") {
+        // Sound-Effect
+        final player = AudioPlayer();
+        player.play(AssetSource("audio/success.mp3"));
+      } else {
+        // Sound-Effect
+        final player = AudioPlayer();
+        player.play(AssetSource("audio/fail.mp3"));
+      }
     }
   }
 }
