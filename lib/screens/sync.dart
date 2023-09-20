@@ -373,7 +373,7 @@ class _SyncTicketState extends State<SyncTicket> {
                     ),
                   ),
                   const SizedBox(
-                    height: 35.0,
+                    height: 25.0,
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -423,7 +423,7 @@ class _SyncTicketState extends State<SyncTicket> {
                   Visibility(
                     visible: totalTicket.isNotEmpty == true,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 50.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: Text(
                         totalTicket.isNotEmpty ? "Total Ticket: ${totalTicket[0]['total_ticket']}" : "",
                         style: TextStyle(
@@ -435,7 +435,7 @@ class _SyncTicketState extends State<SyncTicket> {
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: 8.0,
                   ),
                   Visibility(
                     visible: countClaimedTicket.isNotEmpty == true,
