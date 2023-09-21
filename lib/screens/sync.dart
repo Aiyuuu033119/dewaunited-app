@@ -322,7 +322,7 @@ class _SyncTicketState extends State<SyncTicket> {
                 children: [
                   // if (duration.toString() != '0:00:00.000000')
                   const SizedBox(
-                    height: 60.0,
+                    height: 30.0,
                   ),
                   // if (duration.toString() != '0:00:00.000000')
                   Container(
