@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
           darkmode: darkMode,
           active: index,
           onTap: (ctx, i) {
-            if (i == 3) {
+            if (i == 4) {
               logoutModel(context);
             } else {
               setState(() {

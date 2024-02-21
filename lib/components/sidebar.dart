@@ -85,7 +85,7 @@ class Sidebar extends StatelessWidget {
                             ? Colors.black
                             : Colors.white,
                     fontSize: 15.0,
-                    fontWeight: active == 1 ? FontWeight.w600 : FontWeight.w100,
+                    fontWeight: active == 0 ? FontWeight.w600 : FontWeight.w100,
                     fontFamily: 'Spartan',
                   ),
                 ),
@@ -110,7 +110,7 @@ class Sidebar extends StatelessWidget {
                             ? Colors.black
                             : Colors.white,
                     fontSize: 15.0,
-                    fontWeight: active == 2 ? FontWeight.w600 : FontWeight.w100,
+                    fontWeight: active == 1 ? FontWeight.w600 : FontWeight.w100,
                     fontFamily: 'Spartan',
                   ),
                 ),
@@ -161,7 +161,7 @@ class Sidebar extends StatelessWidget {
               ),
               onTap: () => onTap(
                 context,
-                3,
+                4,
               ),
               // onTap: () => {Navigator.of(context).pop()},
             ),
