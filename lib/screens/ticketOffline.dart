@@ -41,7 +41,7 @@ class _TicketOfflineState extends State<TicketOffline> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height + 120.0;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
@@ -52,7 +52,7 @@ class _TicketOfflineState extends State<TicketOffline> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
-              height: isPortrait ? height + (width >= 375 ? height / 15 : height / 3) : width + (height >= 375 ? width / 4 : width / 2),
+              height: isPortrait ? height + (width >= 375 ? height / 3 : height / 2) : width + (height >= 375 ? width / 4 : width / 2),
               child: Stack(
                 children: [
                   SizedBox(

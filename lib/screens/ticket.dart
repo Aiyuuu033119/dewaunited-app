@@ -43,7 +43,7 @@ class _TicketState extends State<Ticket> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height + 120.0;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
@@ -53,7 +53,7 @@ class _TicketState extends State<Ticket> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
-              height: isPortrait ? height + (width >= 375 ? height / 15 : height / 3) : width + (height >= 375 ? width / 4 : width / 2),
+              height: isPortrait ? height + (width >= 375 ? height / 3 : height / 2) : width + (height >= 375 ? width / 4 : width / 2),
               child: Stack(
                 children: [
                   SizedBox(
@@ -565,7 +565,7 @@ class _TicketState extends State<Ticket> {
     checkAuth(context, widget.accessToken, widget.tokenType);
     dialogModal(context, "Are you sure you want to redeem the ticket?", "Reminder", (ctx) async {
       TicketModel instanceTicket = TicketModel();
-      await instanceTicket.ticketUpdate(widget.accessToken, widget.tokenType, widget.qrString);
+      await instanceTicket.ticketUpdate(widget.accessToken, widget.tokenType, widget.ticketData['ticket']);
       Navigator.pop(ctx);
 
       // Sound-Effect
